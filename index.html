@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn" data-theme="dark">
+<html lang="bn" data-theme="warm">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,19 +28,8 @@
     <!-- Animated Perspective Sudoku Grid -->
     <div class="bg-sudoku-grid"></div>
 
-    <!-- Traditional Bengali Sacred Alpona Rotating Mandala -->
-    <svg class="alpona-ornament" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="200" cy="200" r="185" stroke="#34d399" stroke-width="1.5" stroke-dasharray="6 8" />
-      <circle cx="200" cy="200" r="150" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="10 6" />
-      <circle cx="200" cy="200" r="112" stroke="#34d399" stroke-width="1.2" />
-      <circle cx="200" cy="200" r="72" stroke="#f472b6" stroke-width="1.5" stroke-dasharray="4 6" />
-      <g stroke="#34d399" stroke-width="1.2">
-        <path d="M200 15 C225 90, 225 310, 200 385 C175 310, 175 90, 200 15 Z" />
-        <path d="M15 200 C90 225, 310 225, 385 200 C310 175, 90 175, 15 200 Z" />
-        <path d="M69 69 C135 110, 265 290, 331 331 C290 265, 110 135, 69 69 Z" />
-        <path d="M331 69 C265 110, 135 290, 69 331 C110 265, 290 135, 331 69 Z" />
-      </g>
-    </svg>
+    <!-- Warm Golden Sunshine Glow -->
+    <div class="sunshine-glow-ring"></div>
 
     <!-- Interactive 3D Floating Bengali Letter Cubes Canvas -->
     <canvas id="bg-3d-canvas"></canvas>
@@ -76,7 +65,7 @@
         <div class="nav-actions">
           <button type="button" class="icon-glass-btn" data-open-rules title="খেলার নিয়মাবলী">📖</button>
           <button type="button" class="icon-glass-btn" id="btn-sound-toggle" title="শব্দ চালু/বন্ধ করুন">🔊</button>
-          <button type="button" class="icon-glass-btn" id="btn-theme-toggle" title="থিম পরিবর্তন করুন">☀️</button>
+          <button type="button" class="icon-glass-btn" id="btn-theme-toggle" title="সোনালী রোদ / পান্না উদ্যান থিম">🌿</button>
           <a href="downloads/BornoSudoku-v1.0.0.apk" download="BornoSudoku-v1.0.0.apk" data-trigger-apk-download class="btn-nav-apk">
             <span>📥</span>
             <span>ডাউনলোড APK</span>
@@ -174,24 +163,24 @@
               <div class="floating-3d-badge badge-float-1">
                 <span style="font-size:1.35rem;">🏆</span>
                 <div>
-                  <div style="color:#fbbf24;">প্রথম বিজয় পদক</div>
-                  <div style="font-size:0.74rem;color:var(--text-secondary);">+৩২০ XP বোনাস অর্জিত!</div>
+                  <div style="color:#d97706;">প্রথম বিজয় পদক</div>
+                  <div style="font-size:0.74rem;color:#475569;">+৩২০ XP বোনাস অর্জিত!</div>
                 </div>
               </div>
 
               <div class="floating-3d-badge badge-float-2">
                 <span style="font-size:1.35rem;">🔤</span>
                 <div>
-                  <div style="color:#6ee7b7;">গোপন শব্দ: বাংলাদেশ</div>
-                  <div style="font-size:0.74rem;color:var(--text-secondary);">শব্দ সুডোকু মোড</div>
+                  <div style="color:#047857;">গোপন শব্দ: বাংলাদেশ</div>
+                  <div style="font-size:0.74rem;color:#475569;">শব্দ সুডোকু মোড</div>
                 </div>
               </div>
 
               <div class="floating-3d-badge badge-float-3">
                 <span style="font-size:1.3rem;">🔥</span>
                 <div>
-                  <div style="color:#fb923c;">৭ দিনের স্ট্রিক!</div>
-                  <div style="font-size:0.72rem;color:var(--text-secondary);">দৈনিক চ্যালেঞ্জ জয়ী</div>
+                  <div style="color:#ea580c;">৭ দিনের স্ট্রিক!</div>
+                  <div style="font-size:0.72rem;color:#475569;">দৈনিক চ্যালেঞ্জ জয়ী</div>
                 </div>
               </div>
 
@@ -409,7 +398,7 @@
             <div class="card-3d-inner">
               <div class="mode-card-top">
                 <div class="mode-icon-3d" style="background:linear-gradient(135deg,#10b981,#047857);">৬×৬</div>
-                <span class="mode-badge-pill" style="background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(52,211,153,0.4);">জনপ্রিয়</span>
+                <span class="mode-badge-pill" style="background:#d1fae5;color:#065f46;border:1px solid #34d399;">জনপ্রিয়</span>
               </div>
               <h3 class="mode-title-bn">৬×৬ ক্লাসিক সুডোকু</h3>
               <p class="mode-desc-bn" style="margin:8px 0 14px;">
@@ -432,7 +421,7 @@
             <div class="card-3d-inner">
               <div class="mode-card-top">
                 <div class="mode-icon-3d" style="background:linear-gradient(135deg,#f59e0b,#d97706);">শব্দ</div>
-                <span class="mode-badge-pill" style="background:rgba(245,158,11,0.2);color:#fde68a;border:1px solid rgba(251,191,36,0.4);">বিশেষ</span>
+                <span class="mode-badge-pill" style="background:#fef3c7;color:#92400e;border:1px solid #fbbf24;">বিশেষ</span>
               </div>
               <h3 class="mode-title-bn">শব্দ সুডোকু (Word Secret)</h3>
               <p class="mode-desc-bn" style="margin:8px 0 14px;">
@@ -455,7 +444,7 @@
             <div class="card-3d-inner">
               <div class="mode-card-top">
                 <div class="mode-icon-3d" style="background:linear-gradient(135deg,#38bdf8,#0284c7);">৪×৪</div>
-                <span class="mode-badge-pill" style="background:rgba(56,189,248,0.2);color:#bae6fd;border:1px solid rgba(56,189,248,0.4);">সহজ</span>
+                <span class="mode-badge-pill" style="background:#e0f2fe;color:#0369a1;border:1px solid #38bdf8;">সহজ</span>
               </div>
               <h3 class="mode-title-bn">৪×৪ মিনি সুডোকু</h3>
               <p class="mode-desc-bn" style="margin:8px 0 14px;">
@@ -476,7 +465,7 @@
             <div class="card-3d-inner">
               <div class="mode-card-top">
                 <div class="mode-icon-3d" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);">৯×৯</div>
-                <span class="mode-badge-pill" style="background:rgba(167,139,250,0.2);color:#ddd6fe;border:1px solid rgba(167,139,250,0.4);">কঠিন</span>
+                <span class="mode-badge-pill" style="background:#ede9fe;color:#5b21b6;border:1px solid #a78bfa;">কঠিন</span>
               </div>
               <h3 class="mode-title-bn">৯×৯ মাস্টার সুডোকু</h3>
               <p class="mode-desc-bn" style="margin:8px 0 14px;">
@@ -499,7 +488,7 @@
             <div class="card-3d-inner">
               <div class="mode-card-top">
                 <div class="mode-icon-3d" style="background:linear-gradient(135deg,#f43f5e,#e11d48);">🔍</div>
-                <span class="mode-badge-pill" style="background:rgba(244,63,94,0.2);color:#fecdd3;border:1px solid rgba(244,63,94,0.4);">শব্দ খেলা</span>
+                <span class="mode-badge-pill" style="background:#ffe4e6;color:#be123c;border:1px solid #fb7185;">শব্দ খেলা</span>
               </div>
               <h3 class="mode-title-bn">শব্দ সন্ধান (Word Connect)</h3>
               <p class="mode-desc-bn" style="margin:8px 0 14px;">
@@ -559,14 +548,14 @@
             <!-- Left: Board & HUD -->
             <div class="board-stage-card">
               <div class="game-hud-bar">
-                <span id="hud-mode-title" class="hud-pill" style="color:var(--accent-primary);">৬×৬ শব্দ সুডোকু • বিশেষ</span>
-                <span class="hud-pill">⏱ সময়: <strong id="hud-timer" style="color:var(--accent-secondary);">০০:০০</strong></span>
-                <span id="hud-mistakes" class="hud-pill" style="color:#fca5a5;">ভুল: ০</span>
+                <span id="hud-mode-title" class="hud-pill" style="color:#047857;">৬×৬ শব্দ সুডোকু • বিশেষ</span>
+                <span class="hud-pill">⏱ সময়: <strong id="hud-timer" style="color:#d97706;">০০:০০</strong></span>
+                <span id="hud-mistakes" class="hud-pill" style="color:#dc2626;">ভুল: ০</span>
               </div>
 
               <div id="secret-clue-banner" class="secret-clue-banner visible">
                 <span id="secret-clue-text">💡 ক্লু: ধাঁধার অক্ষরগুলো সাজালে তৈরি হয় আমাদের প্রিয় দেশের নাম!</span>
-                <span style="background:rgba(251,191,36,0.25);padding:3px 9px;border-radius:8px;font-weight:700;color:#fde68a;white-space:nowrap;">+৮০ বোনাস</span>
+                <span style="background:#f59e0b;padding:3px 10px;border-radius:8px;font-weight:700;color:#ffffff;white-space:nowrap;">+৮০ বোনাস</span>
               </div>
 
               <!-- Dynamic Sudoku Grid -->
@@ -744,12 +733,12 @@
           <div class="card-3d-inner rank-sim-grid">
             <div class="rank-showcase-badge">
               <div id="sim-rank-icon" style="font-size:3.4rem;margin-bottom:6px;">🎓</div>
-              <div id="sim-rank-level" style="font-size:0.88rem;font-weight:700;color:var(--accent-secondary);">লেভেল ৪ পদবী</div>
-              <h3 id="sim-rank-title" style="font-size:1.75rem;margin:4px 0 8px;">সুডোকু পণ্ডিত (Sudoku Scholar)</h3>
-              <p id="sim-rank-desc" style="font-size:0.92rem;color:var(--text-secondary);">
+              <div id="sim-rank-level" style="font-size:0.88rem;font-weight:700;color:#d97706;">লেভেল ৪ পদবী</div>
+              <h3 id="sim-rank-title" style="font-size:1.75rem;margin:4px 0 8px;color:#064e3b;">সুডোকু পণ্ডিত (Sudoku Scholar)</h3>
+              <p id="sim-rank-desc" style="font-size:0.92rem;color:#1e4635;">
                 নিখুঁত ও ভুলহীনভাবে শব্দ সুডোকু জয়ের অভিজ্ঞতা।
               </p>
-              <div style="margin-top:14px;display:inline-block;padding:6px 18px;border-radius:999px;background:rgba(0,0,0,0.35);font-weight:700;color:#6ee7b7;" id="sim-xp-value">
+              <div style="margin-top:14px;display:inline-block;padding:6px 18px;border-radius:999px;background:#047857;font-weight:700;color:#ffffff;" id="sim-xp-value">
                 ১,৮৫০ XP
               </div>
             </div>

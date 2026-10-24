@@ -80,12 +80,12 @@
   ];
 
   const CUBE_PALETTE = [
-    { fill: 'rgba(16, 185, 129, 0.24)', side: 'rgba(4, 120, 87, 0.45)', border: '#34d399', text: '#ecfdf5' },
-    { fill: 'rgba(37, 99, 235, 0.24)', side: 'rgba(29, 78, 216, 0.45)', border: '#60a5fa', text: '#eff6ff' },
-    { fill: 'rgba(249, 115, 22, 0.24)', side: 'rgba(194, 65, 12, 0.45)', border: '#fb923c', text: '#fff7ed' },
-    { fill: 'rgba(234, 179, 8, 0.24)', side: 'rgba(161, 98, 7, 0.45)', border: '#facc15', text: '#fefce8' },
-    { fill: 'rgba(219, 39, 119, 0.24)', side: 'rgba(157, 23, 77, 0.45)', border: '#f472b6', text: '#fdf2f8' },
-    { fill: 'rgba(124, 58, 237, 0.24)', side: 'rgba(91, 33, 182, 0.45)', border: '#a78bfa', text: '#f5f3ff' }
+    { fill: 'rgba(16, 185, 129, 0.78)', side: 'rgba(4, 120, 87, 0.85)', border: '#a7f3d0', text: '#ffffff' },
+    { fill: 'rgba(245, 158, 11, 0.82)', side: 'rgba(180, 83, 9, 0.85)', border: '#fde68a', text: '#ffffff' },
+    { fill: 'rgba(59, 130, 246, 0.78)', side: 'rgba(29, 78, 216, 0.85)', border: '#bae6fd', text: '#ffffff' },
+    { fill: 'rgba(249, 115, 22, 0.80)', side: 'rgba(194, 65, 12, 0.85)', border: '#fed7aa', text: '#ffffff' },
+    { fill: 'rgba(236, 72, 153, 0.78)', side: 'rgba(190, 24, 93, 0.85)', border: '#fbcfe8', text: '#ffffff' },
+    { fill: 'rgba(234, 179, 8, 0.82)', side: 'rgba(161, 98, 7, 0.85)', border: '#fef08a', text: '#422006' }
   ];
 
   const floatingCubes = [];
@@ -1196,9 +1196,9 @@
   const themeBtn = document.getElementById('btn-theme-toggle');
   themeBtn?.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'light' ? 'dark' : 'light';
+    const next = current === 'garden' ? 'warm' : 'garden';
     document.documentElement.setAttribute('data-theme', next);
-    themeBtn.textContent = next === 'light' ? '🌙' : '☀️';
+    themeBtn.textContent = next === 'garden' ? '☀️' : '🌿';
     playTone(600, 'sine', 0.1);
   });
 
