@@ -6,9 +6,13 @@
 [![Min SDK](https://img.shields.io/badge/Min%20SDK-24-blue.svg)](https://developer.android.com/)
 [![Target SDK](https://img.shields.io/badge/Target%20SDK-36-blue.svg)](https://developer.android.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Live Landing Page](https://img.shields.io/badge/🌐_Live_Page-বর্ণ--সুডোকু_3D_Web-047857.svg?style=flat)](https://titaniaroro.github.io/BornoSudoku/)
+[![Download APK](https://img.shields.io/badge/📥_Download-Android_APK-10B981.svg?style=flat)](https://titaniaroro.github.io/BornoSudoku/downloads/BornoSudoku-v1.0.0.apk)
 
 > **বাংলা বর্ণমালার সৌন্দর্য ও সুডোকুর বুদ্ধিবৃত্তিক কৌশলের এক অপূর্ব মিলন!**  
 > An engaging, brain-teasing Bengali word and letter puzzle game built with modern Android, Jetpack Compose, and Material Design 3.
+>
+> 🌐 **অফিশিয়াল ৩ডি ল্যান্ডিং পেজ ও সরাসরি খেলা (Live 3D Landing Page & APK Download):** [https://titaniaroro.github.io/BornoSudoku/](https://titaniaroro.github.io/BornoSudoku/)
 
 ---
 
