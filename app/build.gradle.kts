@@ -1,4 +1,5 @@
 import com.google.gms.googleservices.GoogleServicesPlugin.MissingGoogleServicesStrategy
+import java.io.File
 
 plugins {
   alias(libs.plugins.android.application)
@@ -6,6 +7,28 @@ plugins {
   alias(libs.plugins.google.devtools.ksp)
   alias(libs.plugins.secrets)
   alias(libs.plugins.google.services)
+}
+
+// Automatically generate debug.keystore if missing so assembleDebug succeeds in CI and fresh clones
+val debugKeystoreFile = file("${rootDir}/debug.keystore")
+if (!debugKeystoreFile.exists()) {
+  val javaHome = System.getProperty("java.home")
+  val keytoolBin = File(javaHome, "bin/keytool").takeIf { it.exists() }?.absolutePath ?: "keytool"
+  runCatching {
+    ProcessBuilder(
+      keytoolBin,
+      "-genkeypair",
+      "-v",
+      "-keystore", debugKeystoreFile.absolutePath,
+      "-storepass", "android",
+      "-alias", "androiddebugkey",
+      "-keypass", "android",
+      "-keyalg", "RSA",
+      "-keysize", "2048",
+      "-validity", "10000",
+      "-dname", "CN=Android Debug,O=Android,C=US"
+    ).inheritIO().start().waitFor()
+  }
 }
 
 android {
