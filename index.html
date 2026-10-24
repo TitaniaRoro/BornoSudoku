@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>বর্ণ-সুডোকু (Borno-Sudoku) — বাংলা বর্ণ ও শব্দের ৩ডি বুদ্ধির খেলা | অফিশিয়াল ল্যান্ডিং পেজ ও APK ডাউনলোড</title>
+  <meta name="description" content="বাংলা বর্ণমালার সৌন্দর্য ও সুডোকুর বুদ্ধিবৃত্তিক কৌশলের এক অপূর্ব মিলন! ৬×৬ ক্লাসিক, শব্দ সুডোকু, ৪×৪ মিনি, ৯×৯ মাস্টার এবং শব্দ সন্ধান। এখনই অ্যান্ড্রয়েড APK ডাউনলোড করুন।" />
+  <link rel="icon" type="image/png" href="assets/icon_round.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Custom Mouse Interactive Cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+  <div class="mouse-spotlight"></div>
+
+  <!-- MULTI-LAYERED ANIMATED TEXTURED & 3D BACKGROUND -->
+  <div class="bg-stage" aria-hidden="true">
+    <div class="aurora-blob aurora-1"></div>
+    <div class="aurora-blob aurora-2"></div>
+    <div class="aurora-blob aurora-3"></div>
+    <div class="aurora-blob aurora-4"></div>
+
+    <!-- Animated Perspective Sudoku Grid -->
+    <div class="bg-sudoku-grid"></div>
+
+    <!-- Traditional Bengali Sacred Alpona Rotating Mandala -->
+    <svg class="alpona-ornament" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="185" stroke="#34d399" stroke-width="1.5" stroke-dasharray="6 8" />
+      <circle cx="200" cy="200" r="150" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="10 6" />
+      <circle cx="200" cy="200" r="112" stroke="#34d399" stroke-width="1.2" />
+      <circle cx="200" cy="200" r="72" stroke="#f472b6" stroke-width="1.5" stroke-dasharray="4 6" />
+      <g stroke="#34d399" stroke-width="1.2">
+        <path d="M200 15 C225 90, 225 310, 200 385 C175 310, 175 90, 200 15 Z" />
+        <path d="M15 200 C90 225, 310 225, 385 200 C310 175, 90 175, 15 200 Z" />
+        <path d="M69 69 C135 110, 265 290, 331 331 C290 265, 110 135, 69 69 Z" />
+        <path d="M331 69 C265 110, 135 290, 69 331 C110 265, 290 135, 331 69 Z" />
+      </g>
+    </svg>
+
+    <!-- Interactive 3D Floating Bengali Letter Cubes Canvas -->
+    <canvas id="bg-3d-canvas"></canvas>
+
+    <!-- Tactile Film Grain Noise Texture -->
+    <div class="bg-noise-texture"></div>
+  </div>
+
+  <!-- MAIN PAGE CONTENT -->
+  <div class="page-wrapper">
+
+    <!-- STICKY GLASSMORPHIC NAVBAR -->
+    <header class="navbar-wrap">
+      <nav class="navbar" aria-label="প্রধান নেভিগেশন">
+        <a href="#top" class="nav-brand">
+          <div class="nav-logo-box">
+            <img src="assets/logo.jpg" alt="বর্ণ-সুডোকু লোগো" />
+          </div>
+          <div class="nav-title-group">
+            <span class="nav-title-bn">বর্ণ-সুডোকু</span>
+            <span class="nav-subtitle">বাংলা শব্দ ও বর্ণের বুদ্ধির খেলা</span>
+          </div>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#modes-section">খেলার ধরন</a></li>
+          <li><a href="#play-section">সরাসরি খেলুন 🎮</a></li>
+          <li><a href="#features-section">বৈশিষ্ট্যসমূহ</a></li>
+          <li><a href="#ranks-section">পদবী ও অর্জন</a></li>
+          <li><a href="#download-section">ডাউনলোড APK</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button type="button" class="icon-glass-btn" data-open-rules title="খেলার নিয়মাবলী">📖</button>
+          <button type="button" class="icon-glass-btn" id="btn-sound-toggle" title="শব্দ চালু/বন্ধ করুন">🔊</button>
+          <button type="button" class="icon-glass-btn" id="btn-theme-toggle" title="থিম পরিবর্তন করুন">☀️</button>
+          <a href="downloads/BornoSudoku-v1.0.0.apk" download="BornoSudoku-v1.0.0.apk" data-trigger-apk-download class="btn-nav-apk">
+            <span>📥</span>
+            <span>ডাউনলোড APK</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="top" class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+
+          <!-- Left Column: Bengali Hero Story & CTAs -->
+          <div class="hero-left">
+            <div class="hero-pill">
+              <span class="hero-pill-dot"></span>
+              <span>✨ বাংলা বর্ণমালার প্রথম আধুনিক ৩ডি ও মেটেরিয়াল-৩ সুডোকু গেম</span>
+            </div>
+
+            <!-- Interactive 3D Extruded Bengali Letter Blocks (Click to Pop & Chime!) -->
+            <div class="hero-3d-logo-tiles" aria-label="বর্ণ-সুডোকু ৩ডি টাইটেল ব্লক">
+              <div class="letter-cube-3d cube-blue" title="ট্যাপ করুন!">ব</div>
+              <div class="letter-cube-3d cube-orange" title="ট্যাপ করুন!">র্ণ</div>
+              <div class="letter-cube-3d cube-emerald" title="ট্যাপ করুন!">সু</div>
+              <div class="letter-cube-3d cube-yellow" title="ট্যাপ করুন!">ডো</div>
+              <div class="letter-cube-3d cube-pink" title="ট্যাপ করুন!">কু</div>
+              <div class="letter-cube-3d cube-purple" title="ট্যাপ করুন!">ক</div>
+            </div>
+
+            <h1 class="hero-heading">
+              বাংলা বর্ণের জাদুতে মেতে উঠুক আপনার <span class="gradient-text">বুদ্ধি ও মনোযোগ!</span>
+            </h1>
+
+            <p class="hero-description">
+              <strong>বর্ণ-সুডোকু (Borno-Sudoku)</strong> হলো বাংলা বর্ণমালার সৌন্দর্য এবং সুডোকুর বুদ্ধিবৃত্তিক কৌশলের এক অপূর্ব মিলন। সংখ্যার বদলে <strong>ক, খ, গ, ঘ</strong> কিংবা <strong>অ, আ, ই, ঈ</strong> সাজিয়ে সমাধান করুন ধাঁধা, আর উন্মোচন করুন <strong>বাংলাদেশ, সূর্য ও আনন্দের</strong> মতো লুকানো বাংলা শব্দ!
+            </p>
+
+            <!-- Primary CTA Buttons -->
+            <div class="hero-cta-group">
+              <a href="downloads/BornoSudoku-v1.0.0.apk" download="BornoSudoku-v1.0.0.apk" data-trigger-apk-download class="btn-3d-apk">
+                <div class="btn-apk-icon">🤖</div>
+                <div class="btn-apk-text">
+                  <span class="btn-apk-main">অ্যান্ড্রয়েড APK ডাউনলোড করুন</span>
+                  <span class="btn-apk-sub">সংস্করণ ১.০.০ • ফ্রি ডাউনলোড • Android 7.0+</span>
+                </div>
+              </a>
+
+              <a href="#play-section" class="btn-3d-secondary">
+                <span>🎮</span>
+                <span>পেজেই সরাসরি খেলুন</span>
+              </a>
+            </div>
+
+            <!-- Quick Feature Chips -->
+            <div class="hero-badges-row">
+              <span class="mini-glass-chip">⌨️ বিল্ট-ইন বাংলা কিপ্যাড</span>
+              <span class="mini-glass-chip">📴 ১০০% অফলাইনে খেলা যায়</span>
+              <span class="mini-glass-chip">🛡️ সম্পূর্ণ বিজ্ঞাপনমুক্ত</span>
+              <span class="mini-glass-chip">🎨 Jetpack Compose M3</span>
+            </div>
+
+            <!-- Animated Glassmorphic Stats Bar -->
+            <div class="glass-panel tilt-3d-card hero-stats-bar">
+              <div class="stat-item">
+                <div class="stat-value">৫টি</div>
+                <div class="stat-label">অনন্য গেম মোড</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">৬টি</div>
+                <div class="stat-label">খেলোয়াড় পদবী</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">৮টি</div>
+                <div class="stat-label">গৌরবময় পদক</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">১০০%</div>
+                <div class="stat-label">খাঁটি বাংলা অভিজ্ঞতা</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: True 3D Interactive Smartphone Mockup -->
+          <div class="phone-stage-container">
+            <div id="phone-3d-rig" class="phone-3d-rig">
+              <div class="phone-body-back"></div>
+              <div class="phone-body-mid"></div>
+
+              <!-- Floating 3D Parallax Badges Outside Phone Screen -->
+              <div class="floating-3d-badge badge-float-logo" title="অফিশিয়াল অ্যাপ আইকন">
+                <img src="assets/logo.jpg" alt="Borno Sudoku Logo" />
+              </div>
+
+              <div class="floating-3d-badge badge-float-1">
+                <span style="font-size:1.35rem;">🏆</span>
+                <div>
+                  <div style="color:#fbbf24;">প্রথম বিজয় পদক</div>
+                  <div style="font-size:0.74rem;color:var(--text-secondary);">+৩২০ XP বোনাস অর্জিত!</div>
+                </div>
+              </div>
+
+              <div class="floating-3d-badge badge-float-2">
+                <span style="font-size:1.35rem;">🔤</span>
+                <div>
+                  <div style="color:#6ee7b7;">গোপন শব্দ: বাংলাদেশ</div>
+                  <div style="font-size:0.74rem;color:var(--text-secondary);">শব্দ সুডোকু মোড</div>
+                </div>
+              </div>
+
+              <div class="floating-3d-badge badge-float-3">
+                <span style="font-size:1.3rem;">🔥</span>
+                <div>
+                  <div style="color:#fb923c;">৭ দিনের স্ট্রিক!</div>
+                  <div style="font-size:0.72rem;color:var(--text-secondary);">দৈনিক চ্যালেঞ্জ জয়ী</div>
+                </div>
+              </div>
+
+              <!-- Phone Front Chassis & Live Screen -->
+              <div class="phone-frame">
+                <div class="phone-notch">
+                  <span class="phone-camera-dot"></span>
+                  <span class="phone-speaker"></span>
+                </div>
+
+                <div class="phone-screen">
+                  <!-- App Material 3 TopAppBar -->
+                  <div class="app-topbar">
+                    <div class="app-topbar-brand">
+                      <span class="app-topbar-logo-letter">ব</span>
+                      <span>বর্ণ-সুডোকু</span>
+                    </div>
+                    <div style="display:flex;gap:8px;font-size:0.9rem;cursor:pointer;" data-open-rules title="নিয়মাবলী">
+                      <span>🔗</span>
+                      <span>❓</span>
+                      <span>📊</span>
+                    </div>
+                  </div>
+
+                  <!-- App Body Views -->
+                  <div class="app-screen-body">
+
+                    <!-- View 1: HomeScreen replica -->
+                    <div id="phone-view-home" class="phone-view active">
+                      <div class="phone-hero-banner">
+                        <img src="assets/banner.jpg" alt="বর্ণ ধাঁধা ব্যানার" />
+                      </div>
+
+                      <div class="phone-rank-strip">
+                        <div style="display:flex;align-items:center;gap:8px;">
+                          <span style="width:28px;height:28px;border-radius:50%;background:#047857;color:#fff;display:flex;align-items:center;justify-content:center;">🎖️</span>
+                          <div>
+                            <div style="font-weight:700;font-size:0.78rem;">সুডোকু পণ্ডিত</div>
+                            <div style="font-size:0.68rem;color:#64748b;">লেভেল ৪ পদবী</div>
+                          </div>
+                        </div>
+                        <div style="font-weight:700;color:#047857;font-size:0.8rem;">⭐ ১,৮৫০ XP</div>
+                      </div>
+
+                      <div class="phone-daily-card">
+                        <div style="display:flex;align-items:center;gap:8px;">
+                          <span style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;display:flex;align-items:center;justify-content:center;">📅</span>
+                          <div>
+                            <div style="font-weight:700;font-size:0.82rem;">দৈনিক চ্যালেঞ্জ <span style="background:#fef3c7;color:#b45309;padding:1px 6px;border-radius:6px;font-size:0.66rem;">🔥 ৭ দিন</span></div>
+                            <div style="font-size:0.68rem;color:#64748b;">আজকের বিশেষ ধাঁধা</div>
+                          </div>
+                        </div>
+                        <button type="button" data-phone-tab="game" style="background:#047857;color:#fff;border:none;padding:5px 10px;border-radius:8px;font-family:var(--font-bn);font-weight:700;font-size:0.74rem;cursor:pointer;">খেলুন</button>
+                      </div>
+
+                      <div style="font-weight:700;font-size:0.82rem;margin-top:2px;">ধাঁধার ধরন নির্বাচন করুন</div>
+
+                      <div class="phone-mode-item" data-phone-tab="game">
+                        <div class="phone-mode-icon" style="background:rgba(4,120,87,0.14);color:#047857;">৬×৬</div>
+                        <div style="flex:1;">
+                          <div style="font-weight:700;font-size:0.78rem;">৬×৬ ক্লাসিক সুডোকু <span style="background:#d1fae5;color:#047857;padding:1px 5px;border-radius:4px;font-size:0.62rem;">জনপ্রিয়</span></div>
+                          <div style="font-size:0.66rem;color:#64748b;">ক, খ, গ, ঘ, ঙ, চ বর্ণের আসল সুডোকু</div>
+                        </div>
+                        <span>›</span>
+                      </div>
+
+                      <div class="phone-mode-item" data-phone-tab="game">
+                        <div class="phone-mode-icon" style="background:rgba(217,119,6,0.14);color:#d97706;">শব্দ</div>
+                        <div style="flex:1;">
+                          <div style="font-weight:700;font-size:0.78rem;">শব্দ সুডোকু (Word Secret) <span style="background:#fef3c7;color:#d97706;padding:1px 5px;border-radius:4px;font-size:0.62rem;">বিশেষ</span></div>
+                          <div style="font-size:0.66rem;color:#64748b;">খুঁজে নিন বাংলাদেশ, সূর্য ও আনন্দ!</div>
+                        </div>
+                        <span>›</span>
+                      </div>
+
+                      <div class="phone-mode-item" data-phone-tab="wordhunt">
+                        <div class="phone-mode-icon" style="background:rgba(225,29,72,0.14);color:#e11d48;">🔍</div>
+                        <div style="flex:1;">
+                          <div style="font-weight:700;font-size:0.78rem;">শব্দ সন্ধান (Word Connect)</div>
+                          <div style="font-size:0.66rem;color:#64748b;">বর্ণ জুড়ে সার্থক বাংলা শব্দ খুঁজুন</div>
+                        </div>
+                        <span>›</span>
+                      </div>
+                    </div>
+
+                    <!-- View 2: Interactive Mini 4x4 GameScreen inside Phone -->
+                    <div id="phone-view-game" class="phone-view">
+                      <div style="display:flex;justify-content:space-between;align-items:center;background:#e2e8f0;padding:6px 10px;border-radius:8px;font-weight:700;font-size:0.75rem;">
+                        <span>⏱ ০১:২০</span>
+                        <span style="color:#047857;">৪×৪ মিনি সুডোকু</span>
+                        <span>💡 ৩</span>
+                      </div>
+                      <div style="font-size:0.7rem;color:#475569;text-align:center;">খালি ঘরে ট্যাপ করে নিচের বর্ণ বসান:</div>
+
+                      <div class="phone-mini-grid">
+                        <div class="phone-mini-cell given">ক</div>
+                        <div class="phone-mini-cell selected">খ</div>
+                        <div class="phone-mini-cell">গ</div>
+                        <div class="phone-mini-cell given">ঘ</div>
+
+                        <div class="phone-mini-cell">গ</div>
+                        <div class="phone-mini-cell given">ঘ</div>
+                        <div class="phone-mini-cell given">ক</div>
+                        <div class="phone-mini-cell"></div>
+
+                        <div class="phone-mini-cell"></div>
+                        <div class="phone-mini-cell given">ক</div>
+                        <div class="phone-mini-cell given">ঘ</div>
+                        <div class="phone-mini-cell">গ</div>
+
+                        <div class="phone-mini-cell given">ঘ</div>
+                        <div class="phone-mini-cell">গ</div>
+                        <div class="phone-mini-cell"></div>
+                        <div class="phone-mini-cell given">ক</div>
+                      </div>
+
+                      <div class="phone-mini-keypad">
+                        <button type="button" class="phone-key-btn">ক</button>
+                        <button type="button" class="phone-key-btn">খ</button>
+                        <button type="button" class="phone-key-btn">গ</button>
+                        <button type="button" class="phone-key-btn">ঘ</button>
+                      </div>
+
+                      <div style="background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px;padding:7px;text-align:center;font-size:0.72rem;color:#065f46;font-weight:600;">
+                        ✨ নিচে বড় প্লেগ্রাউন্ডে ৬×৬ শব্দ সুডোকু খেলুন!
+                      </div>
+                    </div>
+
+                    <!-- View 3: WordHuntScreen inside Phone -->
+                    <div id="phone-view-wordhunt" class="phone-view">
+                      <div style="background:#047857;color:#fff;padding:8px 10px;border-radius:10px;text-align:center;font-weight:700;">
+                        শব্দ সন্ধান • সহজ বাংলা শব্দ (৪/৬ প্রাপ্ত)
+                      </div>
+                      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                        <div style="background:#d1fae5;padding:6px 8px;border-radius:8px;font-weight:700;color:#065f46;">✅ কলম <span style="font-weight:400;font-size:0.65rem;display:block;">লেখার সরঞ্জাম</span></div>
+                        <div style="background:#d1fae5;padding:6px 8px;border-radius:8px;font-weight:700;color:#065f46;">✅ কমল <span style="font-weight:400;font-size:0.65rem;display:block;">পদ্ম ফুল</span></div>
+                        <div style="background:#d1fae5;padding:6px 8px;border-radius:8px;font-weight:700;color:#065f46;">✅ বর <span style="font-weight:400;font-size:0.65rem;display:block;">আশীর্বাদ</span></div>
+                        <div style="background:#d1fae5;padding:6px 8px;border-radius:8px;font-weight:700;color:#065f46;">✅ বল <span style="font-weight:400;font-size:0.65rem;display:block;">খেলার গোলক</span></div>
+                      </div>
+                      <div style="margin:6px auto;width:130px;height:130px;border-radius:50%;background:#ecfdf5;border:2px solid #047857;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;padding:14px;">
+                        <span style="width:32px;height:32px;border-radius:50%;background:#047857;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">ক</span>
+                        <span style="width:32px;height:32px;border-radius:50%;background:#d97706;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">ল</span>
+                        <span style="width:32px;height:32px;border-radius:50%;background:#047857;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">ম</span>
+                        <span style="width:32px;height:32px;border-radius:50%;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">ব</span>
+                        <span style="width:32px;height:32px;border-radius:50%;background:#db2777;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">র</span>
+                      </div>
+                    </div>
+
+                    <!-- View 4: StatsScreen inside Phone -->
+                    <div id="phone-view-stats" class="phone-view">
+                      <div style="background:linear-gradient(135deg,#047857,#065f46);color:#fff;padding:12px;border-radius:12px;">
+                        <div style="font-size:0.72rem;opacity:0.9;">লেভেল ৪ পদবী</div>
+                        <div style="font-size:1.05rem;font-weight:700;">🎓 সুডোকু পণ্ডিত</div>
+                        <div style="margin-top:6px;background:rgba(255,255,255,0.2);height:7px;border-radius:99px;overflow:hidden;">
+                          <div style="width:68%;height:100%;background:#fbbf24;"></div>
+                        </div>
+                        <div style="font-size:0.68rem;margin-top:4px;">১,৮৫০ / ৩,০০০ XP</div>
+                      </div>
+                      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                        <div style="background:#fff;padding:8px;border-radius:8px;border:1px solid #e2e8f0;text-align:center;">
+                          <div style="font-weight:700;font-size:1rem;color:#047857;">২৪</div>
+                          <div style="font-size:0.66rem;color:#64748b;">সমাধানকৃত ধাঁধা</div>
+                        </div>
+                        <div style="background:#fff;padding:8px;border-radius:8px;border:1px solid #e2e8f0;text-align:center;">
+                          <div style="font-weight:700;font-size:1rem;color:#d97706;">৯৬%</div>
+                          <div style="font-size:0.66rem;color:#64748b;">জয়ের হার</div>
+                        </div>
+                      </div>
+                      <div style="background:#fff;padding:8px;border-radius:8px;border:1px solid #e2e8f0;font-size:0.74rem;">
+                        <strong>অর্জিত পদক:</strong> 🏆 প্রথম বিজয়, ⭐ নিখুঁত সমাধান, ⚡ গতি তারকা, 🧠 শব্দ বিশারদ
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- Inside-Phone Screen Switcher Bar -->
+                  <div class="phone-bottom-tabs">
+                    <button type="button" class="phone-tab-btn active" data-phone-tab="home">🏠<span>হোম</span></button>
+                    <button type="button" class="phone-tab-btn" data-phone-tab="game">🧩<span>সুডোকু</span></button>
+                    <button type="button" class="phone-tab-btn" data-phone-tab="wordhunt">🔍<span>শব্দ সন্ধান</span></button>
+                    <button type="button" class="phone-tab-btn" data-phone-tab="stats">🏆<span>পদবী</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3D View Controls for the Phone -->
+            <div class="phone-controls-bar" aria-label="৩ডি ফোন ভিউ কন্ট্রোল">
+              <button type="button" class="chip-control-btn active" data-phone-control="mouse">🖱️ মাউস ৩ডি টিল্ট</button>
+              <button type="button" class="chip-control-btn" data-phone-control="orbit">🔄 অটো ৩ডি অরবিট</button>
+              <button type="button" class="chip-control-btn" data-phone-control="exploded">✨ ৩ডি লেয়ার ভিউ (Exploded)</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 1: 5 GAME MODES SHOWCASE (খেলার ৫টি রোমাঞ্চকর ধরন)
+         ========================================================================== -->
+    <section id="modes-section" class="section-block">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">🧩 বহুমাত্রিক ধাঁধার সম্ভার</div>
+          <h2 class="section-title">খেলার ৫টি অনন্য ও রোমাঞ্চকর ধরন</h2>
+          <p class="section-subtitle">
+            শিশু ও নতুনদের জন্য সহজ ৪×৪ মিনি গ্রিড থেকে শুরু করে অভিজ্ঞদের জন্য ৯×৯ মাস্টার সুডোকু এবং গোপন বাংলা শব্দ খোঁজার রোমাঞ্চ!
+          </p>
+        </div>
+
+        <div class="modes-3d-grid">
+          <!-- Mode 1: 6x6 Classic -->
+          <article class="glass-panel tilt-3d-card mode-card-3d">
+            <div class="card-3d-inner">
+              <div class="mode-card-top">
+                <div class="mode-icon-3d" style="background:linear-gradient(135deg,#10b981,#047857);">৬×৬</div>
+                <span class="mode-badge-pill" style="background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid rgba(52,211,153,0.4);">জনপ্রিয়</span>
+              </div>
+              <h3 class="mode-title-bn">৬×৬ ক্লাসিক সুডোকু</h3>
+              <p class="mode-desc-bn" style="margin:8px 0 14px;">
+                ৬টি অনন্য বাংলা ব্যঞ্জনবর্ণ এবং ২×৩ সাব-ব্লকের সমন্বয়ে তৈরি ক্লাসিক বর্ণ-সুডোকু। প্রতিদিনের মস্তিষ্কের ব্যায়ামের জন্য আদর্শ!
+              </p>
+              <div class="mode-sample-letters">
+                <span class="sample-tile">ক</span>
+                <span class="sample-tile">খ</span>
+                <span class="sample-tile">গ</span>
+                <span class="sample-tile">ঘ</span>
+                <span class="sample-tile">ঙ</span>
+                <span class="sample-tile">চ</span>
+              </div>
+            </div>
+            <button type="button" class="btn-try-mode" data-try-mode="6x6">🎮 এই মোডটি টেস্ট করুন</button>
+          </article>
+
+          <!-- Mode 2: 6x6 Word Secret -->
+          <article class="glass-panel tilt-3d-card mode-card-3d">
+            <div class="card-3d-inner">
+              <div class="mode-card-top">
+                <div class="mode-icon-3d" style="background:linear-gradient(135deg,#f59e0b,#d97706);">শব্দ</div>
+                <span class="mode-badge-pill" style="background:rgba(245,158,11,0.2);color:#fde68a;border:1px solid rgba(251,191,36,0.4);">বিশেষ</span>
+              </div>
+              <h3 class="mode-title-bn">শব্দ সুডোকু (Word Secret)</h3>
+              <p class="mode-desc-bn" style="margin:8px 0 14px;">
+                ধাঁধার বর্ণগুলো সাজালেই উন্মোচিত হবে <strong>বাংলাদেশ</strong>, <strong>সূর্য</strong> কিংবা <strong>আনন্দ</strong>-এর মতো অর্থবহ গোপন বাংলা শব্দ ও তার তাৎপর্য!
+              </p>
+              <div class="mode-sample-letters">
+                <span class="sample-tile">ব</span>
+                <span class="sample-tile">া</span>
+                <span class="sample-tile">ং</span>
+                <span class="sample-tile">ল</span>
+                <span class="sample-tile">দ</span>
+                <span class="sample-tile">শ</span>
+              </div>
+            </div>
+            <button type="button" class="btn-try-mode" data-try-mode="word_secret">✨ গোপন শব্দ খেলুন</button>
+          </article>
+
+          <!-- Mode 3: 4x4 Mini -->
+          <article class="glass-panel tilt-3d-card mode-card-3d">
+            <div class="card-3d-inner">
+              <div class="mode-card-top">
+                <div class="mode-icon-3d" style="background:linear-gradient(135deg,#38bdf8,#0284c7);">৪×৪</div>
+                <span class="mode-badge-pill" style="background:rgba(56,189,248,0.2);color:#bae6fd;border:1px solid rgba(56,189,248,0.4);">সহজ</span>
+              </div>
+              <h3 class="mode-title-bn">৪×৪ মিনি সুডোকু</h3>
+              <p class="mode-desc-bn" style="margin:8px 0 14px;">
+                শিশু, নতুন খেলোয়াড় বা দ্রুত মানসিক ওয়ার্ম-আপের জন্য ৪টি স্বরবর্ণ (অ, আ, ই, ঈ) বা ব্যঞ্জনবর্ণ (ক, খ, গ, ঘ) দিয়ে তৈরি সহজ ধাঁধা।
+              </p>
+              <div class="mode-sample-letters">
+                <span class="sample-tile">অ</span>
+                <span class="sample-tile">আ</span>
+                <span class="sample-tile">ই</span>
+                <span class="sample-tile">ঈ</span>
+              </div>
+            </div>
+            <button type="button" class="btn-try-mode" data-try-mode="4x4">⚡ ৪×৪ মিনি খেলুন</button>
+          </article>
+
+          <!-- Mode 4: 9x9 Master -->
+          <article class="glass-panel tilt-3d-card mode-card-3d">
+            <div class="card-3d-inner">
+              <div class="mode-card-top">
+                <div class="mode-icon-3d" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);">৯×৯</div>
+                <span class="mode-badge-pill" style="background:rgba(167,139,250,0.2);color:#ddd6fe;border:1px solid rgba(167,139,250,0.4);">কঠিন</span>
+              </div>
+              <h3 class="mode-title-bn">৯×৯ মাস্টার সুডোকু</h3>
+              <p class="mode-desc-bn" style="margin:8px 0 14px;">
+                সুডোকু বিশেষজ্ঞদের জন্য 'ক' থেকে 'ঝ' পর্যন্ত ৯টি বাংলা বর্ণে পূর্ণাঙ্গ ৩×৩ ব্লকের চূড়ান্ত বুদ্ধিবৃত্তিক চ্যালেঞ্জ ও সর্বোচ্চ ৫০০ XP!
+              </p>
+              <div class="mode-sample-letters">
+                <span class="sample-tile">ক</span>
+                <span class="sample-tile">খ</span>
+                <span class="sample-tile">গ</span>
+                <span class="sample-tile">ছ</span>
+                <span class="sample-tile">জ</span>
+                <span class="sample-tile">ঝ</span>
+              </div>
+            </div>
+            <button type="button" class="btn-try-mode" data-try-mode="6x6">👑 চ্যালেঞ্জ দেখুন</button>
+          </article>
+
+          <!-- Mode 5: Word Hunt (শব্দ সন্ধান) -->
+          <article class="glass-panel tilt-3d-card mode-card-3d">
+            <div class="card-3d-inner">
+              <div class="mode-card-top">
+                <div class="mode-icon-3d" style="background:linear-gradient(135deg,#f43f5e,#e11d48);">🔍</div>
+                <span class="mode-badge-pill" style="background:rgba(244,63,94,0.2);color:#fecdd3;border:1px solid rgba(244,63,94,0.4);">শব্দ খেলা</span>
+              </div>
+              <h3 class="mode-title-bn">শব্দ সন্ধান (Word Connect)</h3>
+              <p class="mode-desc-bn" style="margin:8px 0 14px;">
+                বৃত্তাকার বর্ণের টাইলসগুলো পরপর যুক্ত করে তৈরি করুন <strong>কলম, কমল, নদী, মধু</strong>-এর মতো সার্থক বাংলা শব্দ এবং জানুন অর্থ!
+              </p>
+              <div class="mode-sample-letters">
+                <span class="sample-tile">ক</span>
+                <span class="sample-tile">ল</span>
+                <span class="sample-tile">ম</span>
+                <span class="sample-tile">ন</span>
+                <span class="sample-tile">দ</span>
+                <span class="sample-tile">ী</span>
+              </div>
+            </div>
+            <button type="button" class="btn-try-mode" data-try-mode="word_hunt">🔤 শব্দ সন্ধান খেলুন</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 2: LIVE PLAYABLE INTERACTIVE BORNO-SUDOKU & WORD HUNT ARENA
+         ========================================================================== -->
+    <section id="play-section" class="section-block">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">🎮 ইন্টারেক্টিভ লাইভ প্রিভিউ</div>
+          <h2 class="section-title">ডাউনলোডের আগেই পেজেই খেলে দেখুন!</h2>
+          <p class="section-subtitle">
+            অ্যাপের আসল বাংলা কিপ্যাড, টীকা (Notes), ভুল শনাক্তকরণ, স্মার্ট ইঙ্গিত এবং গোপন শব্দ উন্মোচন সরাসরি নিচের ৩ডি গ্লাস বোর্ডে উপভোগ করুন।
+          </p>
+        </div>
+
+        <div class="glass-panel playground-shell">
+          <!-- Mode Switcher Tabs -->
+          <div class="playground-mode-tabs">
+            <button type="button" class="play-tab-btn active" data-play-mode="word_secret">
+              <span>✨</span>
+              <span>৬×৬ শব্দ সুডোকু (গোপন শব্দ: বাংলাদেশ)</span>
+            </button>
+            <button type="button" class="play-tab-btn" data-play-mode="4x4">
+              <span>⚡</span>
+              <span>৪×৪ মিনি সুডোকু (সহজ)</span>
+            </button>
+            <button type="button" class="play-tab-btn" data-play-mode="6x6">
+              <span>🧩</span>
+              <span>৬×৬ ক্লাসিক সুডোকু</span>
+            </button>
+            <button type="button" class="play-tab-btn" data-play-mode="word_hunt">
+              <span>🔍</span>
+              <span>শব্দ সন্ধান (Word Connect)</span>
+            </button>
+          </div>
+
+          <!-- SUDOKU STAGE -->
+          <div id="sudoku-stage-wrap" class="playground-layout">
+            <!-- Left: Board & HUD -->
+            <div class="board-stage-card">
+              <div class="game-hud-bar">
+                <span id="hud-mode-title" class="hud-pill" style="color:var(--accent-primary);">৬×৬ শব্দ সুডোকু • বিশেষ</span>
+                <span class="hud-pill">⏱ সময়: <strong id="hud-timer" style="color:var(--accent-secondary);">০০:০০</strong></span>
+                <span id="hud-mistakes" class="hud-pill" style="color:#fca5a5;">ভুল: ০</span>
+              </div>
+
+              <div id="secret-clue-banner" class="secret-clue-banner visible">
+                <span id="secret-clue-text">💡 ক্লু: ধাঁধার অক্ষরগুলো সাজালে তৈরি হয় আমাদের প্রিয় দেশের নাম!</span>
+                <span style="background:rgba(251,191,36,0.25);padding:3px 9px;border-radius:8px;font-weight:700;color:#fde68a;white-space:nowrap;">+৮০ বোনাস</span>
+              </div>
+
+              <!-- Dynamic Sudoku Grid -->
+              <div id="live-sudoku-grid" class="live-sudoku-grid" aria-label="বর্ণ-সুডোকু খেলার বোর্ড"></div>
+
+              <p id="game-status-msg" style="margin-top:14px;font-size:0.92rem;font-weight:600;text-align:center;color:var(--accent-primary);">
+                একটি খালি ঘর নির্বাচন করে নিচের বাংলা কিপ্যাড থেকে বর্ণ বসান।
+              </p>
+            </div>
+
+            <!-- Right: Assistant Tools & Native Bengali Keypad -->
+            <div class="controls-stage-card">
+              <div class="glass-panel" style="padding:20px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                  <h3 style="font-size:1.15rem;">🛠️ বুদ্ধিদীপ্ত সহায়ক টুলস</h3>
+                  <button type="button" class="chip-control-btn" data-open-rules>📖 নিয়মাবলী</button>
+                </div>
+
+                <div class="assistant-tools-grid">
+                  <button type="button" id="btn-tool-undo" class="tool-action-btn">
+                    <span style="font-size:1.3rem;">↩️</span>
+                    <span>পূর্বাবস্থা</span>
+                  </button>
+                  <button type="button" id="btn-tool-erase" class="tool-action-btn">
+                    <span style="font-size:1.3rem;">🧹</span>
+                    <span>মুছুন</span>
+                  </button>
+                  <button type="button" id="btn-tool-note" class="tool-action-btn">
+                    <span style="font-size:1.3rem;">✏️</span>
+                    <span>টীকা (নোট)</span>
+                  </button>
+                  <button type="button" id="btn-tool-hint" class="tool-action-btn">
+                    <span style="font-size:1.3rem;">💡</span>
+                    <span id="hud-hints-left">ইঙ্গিত (৩)</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="glass-panel" style="padding:20px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                  <h3 style="font-size:1.15rem;">⌨️ অন-স্ক্রিন বাংলা কিপ্যাড</h3>
+                  <span style="font-size:0.8rem;color:var(--text-muted);">অবশিষ্ট বর্ণ সংখ্যা ব্যাজসহ</span>
+                </div>
+
+                <!-- Dynamic Bengali Keypad -->
+                <div id="bengali-keypad-grid" class="bengali-keypad-grid"></div>
+
+                <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;">
+                  <button type="button" id="btn-instant-solve" class="btn-try-mode" style="flex:1;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border:none;">
+                    🎉 সমাধান ও বিজয় উৎসব দেখুন
+                  </button>
+                  <button type="button" id="btn-reset-board" class="btn-try-mode" style="width:auto;padding:10px 18px;">
+                    🔄 নতুন করে শুরু
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- WORD HUNT (শব্দ সন্ধান) STAGE -->
+          <div id="word-hunt-stage-wrap" class="word-hunt-stage">
+            <div class="board-stage-card" style="text-align:center;">
+              <h3 style="font-size:1.3rem;margin-bottom:6px;">🔤 বর্ণের চাকা থেকে বাংলা শব্দ তৈরি করুন</h3>
+              <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;">
+                বৃত্তের বর্ণগুলোতে একে একে ক্লিক করে শব্দ বানান এবং 'শব্দ জমা দিন' বাটনে চাপুন!
+              </p>
+
+              <div id="composed-word-display" style="min-height:48px;padding:10px 22px;border-radius:14px;background:rgba(255,255,255,0.08);border:1.5px solid var(--glass-border-bright);font-size:1.35rem;font-weight:700;color:var(--accent-secondary);margin-bottom:18px;display:inline-flex;align-items:center;justify-content:center;">
+                বর্ণে ট্যাপ করে শব্দ তৈরি করুন
+              </div>
+
+              <div id="word-wheel-circle" class="word-wheel-circle"></div>
+
+              <div style="display:flex;gap:12px;margin-top:20px;justify-content:center;">
+                <button type="button" id="btn-wh-submit" class="btn-nav-apk" style="border:none;">✅ শব্দ যাচাই করুন</button>
+                <button type="button" id="btn-wh-clear" class="chip-control-btn">✖ মুছুন</button>
+              </div>
+
+              <p id="word-hunt-feedback" style="margin-top:12px;font-weight:700;font-size:0.92rem;color:var(--accent-primary);">
+                ইঙ্গিত: 'কলম', 'কমল', 'বল', 'বর', 'কল' শব্দগুলো তৈরি করার চেষ্টা করুন!
+              </p>
+            </div>
+
+            <div class="glass-panel" style="padding:24px;">
+              <h3 style="font-size:1.25rem;margin-bottom:14px;">🎯 লক্ষ্যবস্তু বাংলা শব্দ ও অর্থ (৬টি)</h3>
+              <div id="word-targets-list" class="word-targets-list"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: 6 CORE FEATURES BENTO GRID (অত্যাধুনিক বৈশিষ্ট্যসমূহ)
+         ========================================================================== -->
+    <section id="features-section" class="section-block">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">✨ মেটেরিয়াল ডিজাইন ৩ ও ক্লিন আর্কিটেকচার</div>
+          <h2 class="section-title">কেন বর্ণ-সুডোকু সবার থেকে আলাদা?</h2>
+          <p class="section-subtitle">
+            আধুনিক অ্যান্ড্রয়েড জেটপ্যাক কম্পোজ (Jetpack Compose M3) এবং খাঁটি বাংলা ভাষাভাষীদের সুবিধার কথা মাথায় রেখে তৈরি প্রতিটি ফিচার।
+          </p>
+        </div>
+
+        <div class="bento-features-grid">
+          <!-- Feature 1 (Span 2) -->
+          <div class="glass-panel tilt-3d-card bento-card span-2">
+            <div class="card-3d-inner">
+              <div class="bento-icon-wrap">⌨️</div>
+              <h3 class="bento-title" style="margin-top:10px;">স্মার্ট অন-স্ক্রিন বাংলা কিপ্যাড (আলাদা কীবোর্ডের প্রয়োজন নেই)</h3>
+              <p class="bento-text" style="margin-top:6px;">
+                আপনার ফোনে বাংলা কীবোর্ড ইনস্টল করা না থাকলেও কোনো সমস্যা নেই! গেমের ভেতরেই রয়েছে কাস্টম বাংলা বর্ণের কিপ্যাড। প্রতিটি বর্ণের পাশে রিয়েল-টাইম ব্যাজে দেখা যায় আর কতটি বর্ণ বসানো বাকি আছে, আর সবগুলো বসানো শেষ হলে স্বয়ংক্রিয়ভাবে সবুজ টিক (✓) চিহ্ন ভেসে ওঠে।
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="glass-panel tilt-3d-card bento-card">
+            <div class="card-3d-inner">
+              <div class="bento-icon-wrap" style="background:rgba(245,158,11,0.18);border-color:rgba(251,191,36,0.4);">🧠</div>
+              <h3 class="bento-title" style="margin-top:10px;">অ্যাডভান্সড ডিডাকশন টুলস</h3>
+              <p class="bento-text" style="margin-top:6px;">
+                গভীর সুডোকু কৌশলের জন্য রয়েছে <strong>টীকা (Pencil Notes)</strong> মোড, তাৎক্ষণিক ভুল শনাক্তকরণ (Auto-Conflict Detection), একই বর্ণ হাইলাইট এবং স্মার্ট ইঙ্গিত।
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="glass-panel tilt-3d-card bento-card">
+            <div class="card-3d-inner">
+              <div class="bento-icon-wrap" style="background:rgba(56,189,248,0.18);border-color:rgba(56,189,248,0.4);">🎨</div>
+              <h3 class="bento-title" style="margin-top:10px;">হিন্দ শিলিগুড়ি ফন্ট ও ডার্ক থিম</h3>
+              <p class="bento-text" style="margin-top:6px;">
+                ঝকঝকে বাংলা বর্ণের জন্য যুক্ত করা হয়েছে অফলাইন <strong>Hind Siliguri</strong> ফন্ট এবং চোখের আরামের জন্য এমারেল্ড গ্রিন লাইট ও ডার্ক থিম।
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 4 (Span 2) -->
+          <div class="glass-panel tilt-3d-card bento-card span-2">
+            <div class="card-3d-inner">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+                <div class="bento-icon-wrap" style="background:rgba(236,72,153,0.18);border-color:rgba(244,114,182,0.4);">📲</div>
+                <button type="button" id="btn-share-challenge" class="btn-nav-apk" style="border:none;">
+                  🔗 বন্ধুকে চ্যালেঞ্জ বার্তা কপি করুন
+                </button>
+              </div>
+              <h3 class="bento-title" style="margin-top:10px;">সোশ্যাল মিডিয়া শেয়ার ও ফ্রেন্ড চ্যালেঞ্জ</h3>
+              <p class="bento-text" style="margin-top:6px;">
+                ধাঁধা সমাধানের পর আপনার সময় (যেমন <code>০১:৪৫</code>), অর্জিত পয়েন্ট, গোপন শব্দ এবং দৈনিক স্ট্রিকসহ সুন্দর ফরম্যাটেড বিজয় কার্ড সরাসরি বন্ধুদের সাথে হোয়াটসঅ্যাপ, ফেসবুক বা মেসেঞ্জারে শেয়ার করুন!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: GAMIFICATION, PLAYER RANKS SIMULATOR & 8 3D HOLOGRAPHIC BADGES
+         ========================================================================== -->
+    <section id="ranks-section" class="section-block">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">🏆 গ্যামিফিকেশন, XP ও অর্জন</div>
+          <h2 class="section-title">‘শিক্ষানবিস’ থেকে হয়ে উঠুন ‘বর্ণসম্রাট’!</h2>
+          <p class="section-subtitle">
+            প্রতিটি সঠিক সমাধান, গতি বোনাস ও ভুলহীন জয়ে অর্জন করুন XP পয়েন্ট। নিচের স্লাইডারটি সরিয়ে দেখুন কীভাবে আপনার খেলোয়াড় পদবী উন্নীত হয়!
+          </p>
+        </div>
+
+        <!-- Interactive XP Rank Simulator -->
+        <div class="glass-panel tilt-3d-card rank-simulator-card">
+          <div class="card-3d-inner rank-sim-grid">
+            <div class="rank-showcase-badge">
+              <div id="sim-rank-icon" style="font-size:3.4rem;margin-bottom:6px;">🎓</div>
+              <div id="sim-rank-level" style="font-size:0.88rem;font-weight:700;color:var(--accent-secondary);">লেভেল ৪ পদবী</div>
+              <h3 id="sim-rank-title" style="font-size:1.75rem;margin:4px 0 8px;">সুডোকু পণ্ডিত (Sudoku Scholar)</h3>
+              <p id="sim-rank-desc" style="font-size:0.92rem;color:var(--text-secondary);">
+                নিখুঁত ও ভুলহীনভাবে শব্দ সুডোকু জয়ের অভিজ্ঞতা।
+              </p>
+              <div style="margin-top:14px;display:inline-block;padding:6px 18px;border-radius:999px;background:rgba(0,0,0,0.35);font-weight:700;color:#6ee7b7;" id="sim-xp-value">
+                ১,৮৫০ XP
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>🎚️ আপনার অভিজ্ঞতা (XP) স্লাইডারটি সরিয়ে পদবী দেখুন:</strong>
+                <span style="color:var(--accent-secondary);font-weight:700;">০ — ৬,০০০ XP</span>
+              </div>
+              <input type="range" id="xp-simulator-slider" class="xp-slider-input" min="0" max="6000" step="50" value="1850" aria-label="XP সিমুলেটর স্লাইডার" />
+
+              <div class="ranks-stepper">
+                <div class="rank-step-pill" data-rank-level="1" data-rank-xp="100">লেভেল ১<br/>শিক্ষানবিস</div>
+                <div class="rank-step-pill" data-rank-level="2" data-rank-xp="500">লেভেল ২<br/>বর্ণসন্ধানী</div>
+                <div class="rank-step-pill" data-rank-level="3" data-rank-xp="1100">লেভেল ৩<br/>ধাঁধা সাধক</div>
+                <div class="rank-step-pill active" data-rank-level="4" data-rank-xp="1850">লেভেল ৪<br/>সুডোকু পণ্ডিত</div>
+                <div class="rank-step-pill" data-rank-level="5" data-rank-xp="3500">লেভেল ৫<br/>শব্দ জাদুকর</div>
+                <div class="rank-step-pill" data-rank-level="6" data-rank-xp="5500">লেভেল ৬<br/>বর্ণসম্রাট</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 Authentic Achievement Badges from BengaliWordPuzzles.kt -->
+        <div class="badges-8-grid">
+          <div class="glass-panel tilt-3d-card holo-badge-card">
+            <div class="holo-badge-icon">🏆</div>
+            <div>
+              <h4 style="font-size:1.1rem;">প্রথম বিজয় (First Victory)</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">আপনার জীবনের প্রথম বর্ণ-সুডোকু ধাঁধা সফলভাবে সমাধান করুন।</p>
+            </div>
+          </div>
+
+          <div class="glass-panel tilt-3d-card holo-badge-card">
+            <div class="holo-badge-icon" style="background:linear-gradient(135deg,#10b981,#047857);">⭐</div>
+            <div>
+              <h4 style="font-size:1.1rem;">নিখুঁত সমাধান (Flawless Mind)</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">কোনো ভুল না করে সম্পূর্ণ সঠিক একটি ধাঁধা শেষ করুন।</p>
+            </div>
+          </div>
+
+          <div class="glass-panel tilt-3d-card holo-badge-card">
+            <div class="holo-badge-icon" style="background:linear-gradient(135deg,#38bdf8,#0284c7);">⚡</div>
+            <div>
+              <h4 style="font-size:1.1rem;">গতি তারকা (Speed Star)</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">২ মিনিটের মধ্যে যেকোনো ধাঁধা সমাধান সম্পন্ন করুন।</p>
+            </div>
+          </div>
+
+          <div class="glass-panel tilt-3d-card holo-badge-card">
+            <div class="holo-badge-icon" style="background:linear-gradient(135deg,#f472b6,#db2777);">🧠</div>
+            <div>
+              <h4 style="font-size:1.1rem;">শব্দ বিশারদ (Word Wizard)</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">একটি শব্দ সুডোকু ধাঁধার গোপন বাংলা শব্দ উন্মোচন করুন।</p>
+            </div>
+          </div>
+
+          <div class="glass-panel tilt-3d-card holo-badge-card">
+            <div class="holo-badge-icon" style="background:linear-gradient(135deg,#fb923c,#ea580c);">🔥</div>
+            <div>
+              <h4 style="font-size:1.1rem;">ধারাবাহিক বীর (Streak Champion)</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">টানা ৩ দিন দৈনিক চ্যালেঞ্জ সমাধান করুন।</p>
+            </div>
+          </div>
+
+          <div class="glass-panel tilt-3d-card holo-badge-card">
+            <div class="holo-badge-icon" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);">🛡️</div>
+            <div>
+              <h4 style="font-size:1.1rem;">স্বয়ংসম্পূর্ণ (Self Reliant)</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">কোনো ইঙ্গিত (Hint) না নিয়ে ধাঁধা সমাধান করুন।</p>
+            </div>
+          </div>
+
+          <div class="glass-panel tilt-3d-card holo-badge-card">
+            <div class="holo-badge-icon" style="background:linear-gradient(135deg,#facc15,#ca8a04);">👑</div>
+            <div>
+              <h4 style="font-size:1.1rem;">৯×৯ মাস্টারমাইন্ড (Mastermind)</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">কঠিন ৯×৯ মাস্টার সুডোকু সফলভাবে সমাধান করুন।</p>
+            </div>
+          </div>
+
+          <div class="glass-panel tilt-3d-card holo-badge-card">
+            <div class="holo-badge-icon" style="background:linear-gradient(135deg,#34d399,#059669);">🌟</div>
+            <div>
+              <h4 style="font-size:1.1rem;">পয়েন্ট সংগ্রাহক (Point Collector)</h4>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">মোট ১,০০০ এর বেশি পয়েন্ট ও অভিজ্ঞতা (XP) অর্জন করুন।</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: APK DOWNLOAD CENTER & INSTALLATION GUIDE
+         ========================================================================== -->
+    <section id="download-section" class="section-block">
+      <div class="container">
+        <div class="glass-panel tilt-3d-card download-hub-card">
+          <div class="card-3d-inner download-hub-grid">
+            <div>
+              <div class="section-tag">📥 সরাসরি অ্যান্ড্রয়েড APK ডাউনলোড</div>
+              <h2 class="section-title" style="margin-bottom:10px;">
+                আপনার অ্যান্ড্রয়েড ফোনে আজই ইনস্টল করুন ‘বর্ণ-সুডোকু’
+              </h2>
+              <p style="color:var(--text-secondary);font-size:1.05rem;">
+                কোনো বিজ্ঞাপন নেই, কোনো লুকানো চার্জ নেই এবং ইন্টারনেট ছাড়াই সম্পূর্ণ অফলাইনে খেলা যায়। নিচের বাটনে ক্লিক করে সরাসরি অফিশিয়াল APK ফাইলটি ডাউনলোড করুন।
+              </p>
+
+              <div class="spec-pills-grid">
+                <div class="spec-box">
+                  <div class="spec-label">অ্যাপ সংস্করণ</div>
+                  <div class="spec-val">v১.০.০ (Build 1)</div>
+                </div>
+                <div class="spec-box">
+                  <div class="spec-label">ন্যূনতম অ্যান্ড্রয়েড</div>
+                  <div class="spec-val">Android 7.0+ (SDK 24)</div>
+                </div>
+                <div class="spec-box">
+                  <div class="spec-label">টার্গেট এসডিকে</div>
+                  <div class="spec-val">Android 16 (SDK 36)</div>
+                </div>
+                <div class="spec-box">
+                  <div class="spec-label">ইউআই প্রযুক্তি</div>
+                  <div class="spec-val">Jetpack Compose M3</div>
+                </div>
+                <div class="spec-box">
+                  <div class="spec-label">ভাষা ও ফন্ট</div>
+                  <div class="spec-val">বাংলা (Hind Siliguri)</div>
+                </div>
+                <div class="spec-box">
+                  <div class="spec-label">লাইসেন্স</div>
+                  <div class="spec-val">MIT ওপেন সোর্স</div>
+                </div>
+              </div>
+
+              <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+                <a href="downloads/BornoSudoku-v1.0.0.apk" download="BornoSudoku-v1.0.0.apk" data-trigger-apk-download class="btn-3d-apk">
+                  <div class="btn-apk-icon">📥</div>
+                  <div class="btn-apk-text">
+                    <span class="btn-apk-main">BornoSudoku-v1.0.0.apk ডাউনলোড</span>
+                    <span class="btn-apk-sub">সরাসরি ডাউনলোড • ভেরিফায়েড প্যাকেজ</span>
+                  </div>
+                </a>
+
+                <a href="https://github.com/TitaniaRoro/BornoSudoku" target="_blank" rel="noopener noreferrer" class="btn-3d-secondary">
+                  <span>💻</span>
+                  <span>গিটহাব সোর্স কোড (GitHub)</span>
+                </a>
+              </div>
+
+              <div style="margin-top:16px;font-size:0.78rem;color:var(--text-muted);word-break:break-all;">
+                🔒 <strong>SHA-256 Checksum:</strong> <code>8801703d1feb3634542a9e3d0899a0f778297d41fd682fee8e85fb1ebd22a8db</code>
+              </div>
+            </div>
+
+            <!-- Right: QR Code Box -->
+            <div class="qr-card-box">
+              <canvas id="qr-canvas" width="160" height="160" aria-label="মোবাইল ডাউনলোড কিউআর কোড"></canvas>
+              <strong style="font-size:1rem;">📱 মোবাইলে স্ক্যান করুন</strong>
+              <p style="font-size:0.82rem;color:var(--text-secondary);">
+                আপনার ফোনের ক্যামেরা দিয়ে QR কোডটি স্ক্যান করে সরাসরি ফোনে APK ডাউনলোড করুন।
+              </p>
+            </div>
+          </div>
+
+          <!-- 3-Step Installation Guide in Bengali -->
+          <div class="install-steps-grid">
+            <div class="install-step-card">
+              <div class="step-num-circle">১</div>
+              <div>
+                <h4 style="font-size:1rem;margin-bottom:4px;">APK ফাইল ডাউনলোড করুন</h4>
+                <p style="font-size:0.85rem;color:var(--text-secondary);">
+                  উপরের সবুজ ডাউনলোড বাটনে ক্লিক করে <code>BornoSudoku-v1.0.0.apk</code> ফাইলটি ফোনে সংরক্ষণ করুন।
+                </p>
+              </div>
+            </div>
+
+            <div class="install-step-card">
+              <div class="step-num-circle">২</div>
+              <div>
+                <h4 style="font-size:1rem;margin-bottom:4px;">ইনস্টল অনুমতি দিন</h4>
+                <p style="font-size:0.85rem;color:var(--text-secondary);">
+                  ফাইলটি ওপেন করে প্রয়োজনে ব্রাউজারের "Install Unknown Apps" অপশনটি চালু করুন।
+                </p>
+              </div>
+            </div>
+
+            <div class="install-step-card">
+              <div class="step-num-circle">৩</div>
+              <div>
+                <h4 style="font-size:1rem;margin-bottom:4px;">খেলুন ও বুদ্ধির চর্চা করুন!</h4>
+                <p style="font-size:0.85rem;color:var(--text-secondary);">
+                  অ্যাপটি ওপেন করে ৪×৪, ৬×৬, ৯×৯ কিংবা শব্দ সুডোকু খেলে অর্জন করুন ‘বর্ণসম্রাট’ পদবী!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <img src="assets/logo.jpg" alt="বর্ণ-সুডোকু" style="width:42px;height:42px;border-radius:12px;" />
+          <div>
+            <strong style="font-size:1.1rem;">বর্ণ-সুডোকু (Borno-Sudoku)</strong>
+            <p style="font-size:0.84rem;color:var(--text-muted);">বাংলা বর্ণমালার সৌন্দর্য ও সুডোকুর বুদ্ধিবৃত্তিক কৌশলের মিলন • MIT License</p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:0.9rem;">
+          <a href="#top" style="color:var(--text-secondary);text-decoration:none;">উপরে যান ↑</a>
+          <a href="#play-section" style="color:var(--text-secondary);text-decoration:none;">সরাসরি খেলুন</a>
+          <a href="downloads/BornoSudoku-v1.0.0.apk" download="BornoSudoku-v1.0.0.apk" style="color:var(--accent-primary);text-decoration:none;font-weight:700;">ডাউনলোড APK</a>
+          <a href="https://github.com/TitaniaRoro/BornoSudoku" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary);text-decoration:none;">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 1: RULES DIALOG (খেলার নিয়মাবলী — Exact Match to RulesDialog.kt)
+       ========================================================================== -->
+  <div id="rules-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="rules-modal-title">
+    <div class="modal-glass-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <h3 id="rules-modal-title" style="font-size:1.45rem;">📖 খেলার নিয়মাবলী</h3>
+        <button type="button" class="icon-glass-btn" data-close-modal>✕</button>
+      </div>
+
+      <div class="rule-row">
+        <span class="step-num-circle">১</span>
+        <div>
+          <strong>সারি (Row) নিয়ম</strong>
+          <p style="font-size:0.88rem;color:var(--text-secondary);">প্রতিটি আনুভূমিক সারিতে নির্ধারিত বাংলা অক্ষরগুলো ঠিক একবার করে বসবে। কোনো পুনরাবৃত্তি হবে না।</p>
+        </div>
+      </div>
+
+      <div class="rule-row">
+        <span class="step-num-circle">২</span>
+        <div>
+          <strong>কলাম (Column) নিয়ম</strong>
+          <p style="font-size:0.88rem;color:var(--text-secondary);">প্রতিটি উল্লম্ব কলামে সবগুলো নির্ধারিত অক্ষর একবার করে থাকবে।</p>
+        </div>
+      </div>
+
+      <div class="rule-row">
+        <span class="step-num-circle">৩</span>
+        <div>
+          <strong>ব্লক / বাক্স (Sub-grid) নিয়ম</strong>
+          <p style="font-size:0.88rem;color:var(--text-secondary);">প্রতিটি সীমানার বাক্সে (৪×৪-এ ২×২, ৬×৬-এ ২×৩, ৯×৯-এ ৩×৩) প্রতিটি অক্ষর একবারই বসবে।</p>
+        </div>
+      </div>
+
+      <div class="rule-row">
+        <span class="step-num-circle">৪</span>
+        <div>
+          <strong>শব্দ সুডোকু (Word Secret)</strong>
+          <p style="font-size:0.88rem;color:var(--text-secondary);">বিশেষ শব্দ সুডোকু ধাঁধায় সবগুলো অক্ষর মিলে একটি সার্থক বাংলা শব্দ গঠন করে। ধাঁধা মেলালে শব্দটি উন্মোচিত হবে!</p>
+        </div>
+      </div>
+
+      <button type="button" data-close-modal class="btn-nav-apk" style="width:100%;justify-content:center;margin-top:18px;border:none;padding:12px;">
+        বুঝেছি, খেলা শুরু করি!
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2: VICTORY DIALOG (বিজয় ও গোপন শব্দ উন্মোচন — VictoryDialog.kt)
+       ========================================================================== -->
+  <div id="victory-modal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-glass-card" style="text-align:center;">
+      <div style="font-size:3.4rem;">🏆</div>
+      <h3 style="font-size:1.65rem;color:var(--accent-secondary);margin-bottom:4px;">অভিনন্দন! ধাঁধা সমাধান সম্পন্ন!</h3>
+      <p id="vic-puzzle-name" style="color:var(--text-secondary);font-weight:600;margin-bottom:16px;">৬×৬ শব্দ সুডোকু</p>
+
+      <div id="vic-secret-word-box" style="background:rgba(16,185,129,0.18);border:1.5px solid var(--emerald-400);border-radius:16px;padding:14px;margin-bottom:16px;">
+        <div style="font-size:0.8rem;color:var(--accent-primary);">🔤 উন্মোচিত গোপন বাংলা শব্দ:</div>
+        <div id="vic-secret-word" style="font-size:1.8rem;font-weight:700;color:#fde68a;">বাংলাদেশ</div>
+        <div id="vic-secret-meaning" style="font-size:0.86rem;color:var(--text-secondary);">আমাদের প্রিয় মাতৃভূমি, নদীর দেশ ও সোনার বাংলা।</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;">
+        <div class="spec-box">
+          <div class="spec-label">মোট সময়</div>
+          <div id="vic-time" class="spec-val">০১:২০</div>
+        </div>
+        <div class="spec-box">
+          <div class="spec-label">অর্জিত অভিজ্ঞতা</div>
+          <div id="vic-total-pts" class="spec-val" style="color:var(--accent-secondary);">+৫৪০ XP</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;">
+        <a href="downloads/BornoSudoku-v1.0.0.apk" download="BornoSudoku-v1.0.0.apk" class="btn-nav-apk" style="flex:1;justify-content:center;">
+          📥 সম্পূর্ণ অ্যাপটি ডাউনলোড করুন (APK)
+        </a>
+        <button type="button" data-close-modal class="chip-control-btn">বন্ধ করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 3: APK DOWNLOAD STARTED MODAL
+       ========================================================================== -->
+  <div id="download-modal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-glass-card" style="text-align:center;">
+      <div style="font-size:3.2rem;">🤖✨</div>
+      <h3 style="font-size:1.5rem;margin:6px 0;">বর্ণ-সুডোকু APK ডাউনলোড শুরু হয়েছে!</h3>
+      <p style="font-size:0.94rem;color:var(--text-secondary);margin-bottom:16px;">
+        <code>BornoSudoku-v1.0.0.apk</code> ফাইলটি আপনার ডিভাইসে ডাউনলোড হচ্ছে। যদি স্বয়ংক্রিয়ভাবে শুরু না হয়, তবে নিচের সরাসরি লিংকে ক্লিক করুন।
+      </p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="downloads/BornoSudoku-v1.0.0.apk" download="BornoSudoku-v1.0.0.apk" class="btn-nav-apk">
+          📥 পুনরায় ডাউনলোড করুন (APK)
+        </a>
+        <button type="button" data-close-modal class="chip-control-btn">ঠিক আছে</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

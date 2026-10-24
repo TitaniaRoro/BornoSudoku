@@ -1,0 +1,2084 @@
+@font-face {
+  font-family: 'Hind Siliguri Local';
+  src: url('../assets/hind_siliguri.ttf') format('truetype');
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+:root {
+  /* App Core Palette from Color.kt & Logo */
+  --emerald-950: #031510;
+  --emerald-900: #06251d;
+  --emerald-800: #064e3b;
+  --emerald-700: #047857;
+  --emerald-600: #059669;
+  --emerald-500: #10b981;
+  --emerald-400: #34d399;
+  --emerald-300: #6ee7b7;
+
+  --saffron-600: #d97706;
+  --saffron-500: #f59e0b;
+  --saffron-400: #fbbf24;
+  --saffron-300: #fde68a;
+
+  /* 4-Piece Puzzle Logo Accents */
+  --puzzle-blue: #2563eb;
+  --puzzle-blue-light: #60a5fa;
+  --puzzle-orange: #f97316;
+  --puzzle-yellow: #eab308;
+  --puzzle-pink: #db2777;
+  --puzzle-purple: #7c3aed;
+
+  /* Dark Glass Theme (Default) */
+  --bg-deep: #04130f;
+  --bg-surface: rgba(11, 37, 29, 0.52);
+  --bg-surface-elevated: rgba(16, 52, 41, 0.65);
+  --bg-glass: rgba(15, 42, 34, 0.48);
+  --bg-glass-strong: rgba(10, 31, 25, 0.78);
+  --glass-border: rgba(52, 211, 153, 0.22);
+  --glass-border-bright: rgba(251, 191, 36, 0.45);
+  --glass-highlight: rgba(255, 255, 255, 0.14);
+  --glass-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.65), 0 0 35px rgba(16, 185, 129, 0.12);
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --accent-primary: #34d399;
+  --accent-secondary: #fbbf24;
+
+  /* Global Mouse Tracking Coordinates */
+  --mouse-x: 50vw;
+  --mouse-y: 50vh;
+  --mouse-nx: 0;
+  --mouse-ny: 0;
+
+  --font-bn: 'Hind Siliguri Local', 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system, sans-serif;
+}
+
+[data-theme="light"] {
+  --bg-deep: #eefaf3;
+  --bg-surface: rgba(255, 255, 255, 0.65);
+  --bg-surface-elevated: rgba(255, 255, 255, 0.82);
+  --bg-glass: rgba(255, 255, 255, 0.62);
+  --bg-glass-strong: rgba(246, 251, 247, 0.88);
+  --glass-border: rgba(4, 120, 87, 0.22);
+  --glass-border-bright: rgba(217, 119, 6, 0.45);
+  --glass-highlight: rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 20px 50px -12px rgba(4, 120, 87, 0.18), 0 4px 20px rgba(0, 0, 0, 0.06);
+
+  --text-primary: #0f172a;
+  --text-secondary: #1e293b;
+  --text-muted: #475569;
+  --accent-primary: #047857;
+  --accent-secondary: #d97706;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-bn);
+  color: var(--text-primary);
+  background-color: var(--bg-deep);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-bn);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.65;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  transition: background-color 0.45s ease, color 0.45s ease;
+}
+
+/* ==========================================================================
+   MULTI-LAYERED ANIMATED TEXTURED BACKGROUND & 3D CANVAS
+   ========================================================================== */
+
+.bg-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* 1. Animated Aurora Mesh Gradients */
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(95px);
+  opacity: 0.42;
+  mix-blend-mode: screen;
+  will-change: transform;
+  animation: auroraFloat 18s ease-in-out infinite alternate;
+}
+
+[data-theme="light"] .aurora-blob {
+  mix-blend-mode: multiply;
+  opacity: 0.22;
+}
+
+.aurora-1 {
+  width: 56vw;
+  height: 56vw;
+  max-width: 760px;
+  max-height: 760px;
+  background: radial-gradient(circle, #059669 0%, rgba(4, 120, 87, 0) 70%);
+  top: -15%;
+  left: -10%;
+}
+
+.aurora-2 {
+  width: 48vw;
+  height: 48vw;
+  max-width: 650px;
+  max-height: 650px;
+  background: radial-gradient(circle, #d97706 0%, rgba(217, 119, 6, 0) 70%);
+  top: 22%;
+  right: -12%;
+  animation-delay: -5s;
+  animation-duration: 22s;
+}
+
+.aurora-3 {
+  width: 45vw;
+  height: 45vw;
+  max-width: 620px;
+  max-height: 620px;
+  background: radial-gradient(circle, #2563eb 0%, rgba(37, 99, 235, 0) 70%);
+  bottom: -15%;
+  left: 15%;
+  animation-delay: -9s;
+  animation-duration: 25s;
+}
+
+.aurora-4 {
+  width: 38vw;
+  height: 38vw;
+  max-width: 520px;
+  max-height: 520px;
+  background: radial-gradient(circle, #db2777 0%, rgba(219, 39, 119, 0) 70%);
+  bottom: 10%;
+  right: 18%;
+  animation-delay: -13s;
+  animation-duration: 20s;
+}
+
+@keyframes auroraFloat {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(40px, -35px, 0) scale(1.08) rotate(12deg);
+  }
+  100% {
+    transform: translate3d(-30px, 45px, 0) scale(0.95) rotate(-10deg);
+  }
+}
+
+/* 2. Animated Sudoku Geometric Perspective Grid + Bengali Alpona Texture */
+.bg-sudoku-grid {
+  position: absolute;
+  inset: -20%;
+  background-image:
+    linear-gradient(to right, rgba(52, 211, 153, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52, 211, 153, 0.07) 1px, transparent 1px),
+    linear-gradient(to right, rgba(251, 191, 36, 0.08) 2px, transparent 2px),
+    linear-gradient(to bottom, rgba(251, 191, 36, 0.08) 2px, transparent 2px);
+  background-size: 48px 48px, 48px 48px, 144px 144px, 144px 144px;
+  transform: perspective(900px) rotateX(24deg) translate3d(calc(var(--mouse-nx) * -18px), calc(var(--mouse-ny) * -18px), 0);
+  animation: gridDrift 24s linear infinite;
+  mask-image: radial-gradient(ellipse 80% 75% at 50% 50%, #000 35%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 75% at 50% 50%, #000 35%, transparent 100%);
+}
+
+[data-theme="light"] .bg-sudoku-grid {
+  background-image:
+    linear-gradient(to right, rgba(4, 120, 87, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(4, 120, 87, 0.08) 1px, transparent 1px),
+    linear-gradient(to right, rgba(217, 119, 6, 0.1) 2px, transparent 2px),
+    linear-gradient(to bottom, rgba(217, 119, 6, 0.1) 2px, transparent 2px);
+}
+
+@keyframes gridDrift {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 144px 144px, 144px 144px, 144px 144px, 144px 144px;
+  }
+}
+
+/* Traditional Bengali Alpona Rotating Rings */
+.alpona-ornament {
+  position: absolute;
+  width: 740px;
+  height: 740px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.075;
+  animation: slowSpin 90s linear infinite;
+  pointer-events: none;
+}
+
+[data-theme="light"] .alpona-ornament {
+  opacity: 0.09;
+}
+
+@keyframes slowSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 3. Interactive 3D Floating Bengali Tiles Canvas */
+#bg-3d-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 4. Tactile Animated Film Grain / Noise Texture */
+.bg-noise-texture {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.055'/%3E%3C/svg%3E");
+  animation: grainShift 6s steps(8) infinite;
+  pointer-events: none;
+}
+
+@keyframes grainShift {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -4%); }
+  60% { transform: translate(-4%, -2%); }
+  80% { transform: translate(3%, 4%); }
+}
+
+/* 5. Mouse Spotlight Aura */
+.mouse-spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    550px circle at var(--mouse-x) var(--mouse-y),
+    rgba(52, 211, 153, 0.13),
+    rgba(251, 191, 36, 0.05) 40%,
+    transparent 75%
+  );
+  transition: opacity 0.3s ease;
+}
+
+/* Custom Interactive Cursor Follower */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-secondary);
+  box-shadow: 0 0 12px var(--accent-secondary);
+}
+
+.cursor-ring {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid rgba(52, 211, 153, 0.65);
+  background: rgba(52, 211, 153, 0.06);
+  backdrop-filter: blur(2px);
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              background-color 0.25s ease;
+}
+
+.cursor-ring.cursor-hover {
+  width: 60px;
+  height: 60px;
+  border-color: var(--accent-secondary);
+  background: rgba(251, 191, 36, 0.12);
+}
+
+@media (max-width: 900px), (hover: none) {
+  .cursor-dot, .cursor-ring {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   CORE GLASSMORPHISM & 3D CARD UTILITIES
+   ========================================================================== */
+
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 1px 0 var(--glass-highlight);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Mouse-interactive Specular Sheen on 3D Cards */
+.tilt-3d-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tilt-3d-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    420px circle at var(--card-mx, 50%) var(--card-my, 50%),
+    rgba(255, 255, 255, 0.16),
+    rgba(52, 211, 153, 0.08) 35%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tilt-3d-card:hover::before {
+  opacity: 1;
+}
+
+.tilt-3d-card:hover {
+  border-color: var(--glass-border-bright);
+}
+
+.card-3d-inner {
+  transform: translateZ(26px);
+  position: relative;
+  z-index: 2;
+}
+
+/* Layout Containers */
+.page-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.container {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ==========================================================================
+   STICKY GLASSMORPHIC NAVBAR
+   ========================================================================== */
+
+.navbar-wrap {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  padding: 0 20px;
+  margin-top: 16px;
+}
+
+.navbar {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 12px 22px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35), inset 0 1px 0 var(--glass-highlight);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.nav-logo-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  overflow: hidden;
+  border: 2px solid rgba(251, 191, 36, 0.65);
+  box-shadow: 0 6px 18px rgba(4, 120, 87, 0.45);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nav-brand:hover .nav-logo-box {
+  transform: rotate(-8deg) scale(1.1);
+}
+
+.nav-logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-title-bn {
+  font-size: 1.32rem;
+  font-weight: 700;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #ffffff 0%, #6ee7b7 55%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .nav-title-bn {
+  background: linear-gradient(135deg, #047857 0%, #059669 60%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 15px;
+  border-radius: 999px;
+  transition: all 0.25s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text-primary);
+  background: rgba(52, 211, 153, 0.16);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-glass-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  transition: all 0.25s ease;
+}
+
+.icon-glass-btn:hover {
+  transform: translateY(-2px) scale(1.06);
+  border-color: var(--accent-secondary);
+  background: rgba(251, 191, 36, 0.15);
+}
+
+.btn-nav-apk {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--emerald-600), var(--emerald-700));
+  color: #fff;
+  font-family: var(--font-bn);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  border: 1px solid rgba(110, 231, 183, 0.45);
+  box-shadow: 0 8px 20px rgba(5, 150, 105, 0.4);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-nav-apk:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(16, 185, 129, 0.55);
+  background: linear-gradient(135deg, var(--emerald-500), var(--emerald-600));
+}
+
+/* ==========================================================================
+   HERO SECTION: 3D EXTRUDED BENGALI TILES + 3D INTERACTIVE SMARTPHONE
+   ========================================================================== */
+
+.hero-section {
+  padding: 56px 0 80px;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: var(--accent-primary);
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 22px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.hero-pill-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--saffron-400);
+  box-shadow: 0 0 10px var(--saffron-400);
+  animation: pulseDot 1.8s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+/* 3D Extruded Bengali Wordoku Title Blocks */
+.hero-3d-logo-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+  perspective: 800px;
+}
+
+.letter-cube-3d {
+  width: 62px;
+  height: 62px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+
+.letter-cube-3d.cube-blue {
+  background: linear-gradient(145deg, #3b82f6, #1d4ed8);
+  box-shadow: 0 8px 0 #1e3a8a, 0 16px 28px rgba(37, 99, 235, 0.45), inset 0 2px 3px rgba(255,255,255,0.45);
+}
+.letter-cube-3d.cube-orange {
+  background: linear-gradient(145deg, #fb923c, #ea580c);
+  box-shadow: 0 8px 0 #9a3412, 0 16px 28px rgba(249, 115, 22, 0.45), inset 0 2px 3px rgba(255,255,255,0.45);
+}
+.letter-cube-3d.cube-emerald {
+  background: linear-gradient(145deg, #10b981, #047857);
+  box-shadow: 0 8px 0 #064e3b, 0 16px 28px rgba(16, 185, 129, 0.45), inset 0 2px 3px rgba(255,255,255,0.45);
+}
+.letter-cube-3d.cube-yellow {
+  background: linear-gradient(145deg, #facc15, #ca8a04);
+  box-shadow: 0 8px 0 #854d0e, 0 16px 28px rgba(234, 179, 8, 0.45), inset 0 2px 3px rgba(255,255,255,0.45);
+}
+.letter-cube-3d.cube-pink {
+  background: linear-gradient(145deg, #f472b6, #db2777);
+  box-shadow: 0 8px 0 #831843, 0 16px 28px rgba(219, 39, 119, 0.45), inset 0 2px 3px rgba(255,255,255,0.45);
+}
+.letter-cube-3d.cube-purple {
+  background: linear-gradient(145deg, #a78bfa, #6d28d9);
+  box-shadow: 0 8px 0 #4c1d95, 0 16px 28px rgba(124, 58, 237, 0.45), inset 0 2px 3px rgba(255,255,255,0.45);
+}
+
+.letter-cube-3d:hover {
+  transform: translateY(-10px) rotateX(16deg) rotateY(-14deg) scale(1.1);
+}
+
+.letter-cube-3d:active {
+  transform: translateY(2px) scale(0.96);
+}
+
+.hero-heading {
+  font-size: clamp(2.3rem, 4.3vw, 3.65rem);
+  font-weight: 700;
+  line-height: 1.22;
+  margin-bottom: 18px;
+  letter-spacing: -0.01em;
+}
+
+.hero-heading .gradient-text {
+  background: linear-gradient(135deg, #6ee7b7 0%, #fbbf24 50%, #f472b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .hero-heading .gradient-text {
+  background: linear-gradient(135deg, #047857 0%, #d97706 55%, #db2777 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  max-width: 600px;
+}
+
+/* Primary 3D CTA Buttons */
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.btn-3d-apk {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 28px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #10b981 0%, #047857 60%, #065f46 100%);
+  color: #ffffff;
+  text-decoration: none;
+  font-family: var(--font-bn);
+  border: 1.5px solid rgba(167, 243, 208, 0.6);
+  box-shadow:
+    0 8px 0 #022c22,
+    0 18px 38px rgba(16, 185, 129, 0.45),
+    inset 0 2px 2px rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.btn-3d-apk:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 12px 0 #022c22,
+    0 24px 48px rgba(16, 185, 129, 0.6),
+    inset 0 2px 3px rgba(255, 255, 255, 0.5);
+}
+
+.btn-3d-apk:active {
+  transform: translateY(4px);
+  box-shadow: 0 4px 0 #022c22, 0 10px 20px rgba(16, 185, 129, 0.4);
+}
+
+.btn-apk-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.btn-apk-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.btn-apk-main {
+  font-size: 1.16rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.btn-apk-sub {
+  font-size: 0.78rem;
+  color: #d1fae5;
+  opacity: 0.92;
+}
+
+.btn-3d-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 24px;
+  border-radius: 20px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(18px);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-bn);
+  font-weight: 700;
+  font-size: 1.05rem;
+  border: 1.5px solid var(--glass-border-bright);
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.35), 0 14px 30px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.btn-3d-secondary:hover {
+  transform: translateY(-4px);
+  background: rgba(251, 191, 36, 0.16);
+  border-color: var(--saffron-400);
+}
+
+/* Quick Feature Chips & Stats Row */
+.hero-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.mini-glass-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+}
+
+.hero-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 16px 20px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 6px;
+  border-right: 1px solid var(--glass-border);
+}
+
+.stat-item:last-child {
+  border-right: none;
+}
+
+.stat-value {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  line-height: 1.15;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   3D SMARTPHONE MOCKUP WITH FLOATING PARALLAX Z-LAYERS
+   ========================================================================== */
+
+.phone-stage-container {
+  position: relative;
+  perspective: 1500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.phone-3d-rig {
+  width: 340px;
+  height: 670px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(-14deg) rotateX(8deg);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.phone-3d-rig.auto-orbit {
+  animation: phoneOrbit3D 10s ease-in-out infinite alternate;
+}
+
+@keyframes phoneOrbit3D {
+  0% { transform: rotateY(-18deg) rotateX(9deg) translateY(0px); }
+  50% { transform: rotateY(14deg) rotateX(-6deg) translateY(-12px); }
+  100% { transform: rotateY(-12deg) rotateX(12deg) translateY(6px); }
+}
+
+/* 3D Extruded Back & Side Thickness Layers of Phone */
+.phone-body-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 46px;
+  background: linear-gradient(145deg, #022c22, #064e3b, #0f172a);
+  transform: translateZ(-22px);
+  box-shadow:
+    -25px 35px 65px rgba(0, 0, 0, 0.75),
+    0 0 50px rgba(16, 185, 129, 0.3);
+  border: 2px solid rgba(52, 211, 153, 0.4);
+}
+
+.phone-body-mid {
+  position: absolute;
+  inset: 0;
+  border-radius: 46px;
+  background: linear-gradient(135deg, #047857, #022c22);
+  transform: translateZ(-11px);
+  border: 2px solid rgba(110, 231, 183, 0.3);
+}
+
+/* Main Front Phone Bezel */
+.phone-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 46px;
+  padding: 12px;
+  background: linear-gradient(160deg, #1e293b 0%, #0f172a 50%, #064e3b 100%);
+  border: 2.5px solid rgba(110, 231, 183, 0.55);
+  box-shadow: inset 0 0 12px rgba(52, 211, 153, 0.35);
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Exploded 3D Layer Mode */
+.phone-3d-rig.exploded-view .phone-body-back {
+  transform: translateZ(-80px);
+}
+.phone-3d-rig.exploded-view .phone-body-mid {
+  transform: translateZ(-40px);
+}
+.phone-3d-rig.exploded-view .phone-screen {
+  transform: translateZ(35px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
+}
+.phone-3d-rig.exploded-view .floating-3d-badge {
+  transform: translateZ(110px) scale(1.06);
+}
+
+.phone-notch {
+  width: 110px;
+  height: 22px;
+  background: #090d16;
+  border-radius: 0 0 14px 14px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.phone-camera-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #38bdf8 20%, #0f172a 80%);
+}
+
+.phone-speaker {
+  width: 36px;
+  height: 4px;
+  border-radius: 4px;
+  background: #334155;
+}
+
+.phone-screen {
+  flex: 1;
+  background: #f6fbf7;
+  color: #0f172a;
+  border-radius: 35px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+  margin-top: -12px;
+}
+
+/* App TopBar inside Phone */
+.app-topbar {
+  background: #047857;
+  color: #fff;
+  padding: 22px 14px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.app-topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.app-topbar-logo-letter {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.app-screen-body {
+  flex: 1;
+  padding: 11px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 0.8rem;
+}
+
+/* Phone Screen Views */
+.phone-view {
+  display: none;
+  flex-direction: column;
+  gap: 9px;
+  animation: fadeSlideUp 0.3s ease;
+}
+
+.phone-view.active {
+  display: flex;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.phone-hero-banner {
+  width: 100%;
+  height: 112px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  position: relative;
+}
+
+.phone-hero-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.phone-rank-strip {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.phone-daily-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  border: 1px solid #fde68a;
+}
+
+.phone-mode-item {
+  background: #ffffff;
+  border-radius: 11px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.phone-mode-item:hover {
+  transform: scale(1.02);
+  background: #ecfdf5;
+}
+
+.phone-mode-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* Mini Sudoku inside 3D Phone */
+.phone-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+  background: #1e293b;
+  padding: 4px;
+  border-radius: 10px;
+  margin: 4px 0;
+}
+
+.phone-mini-cell {
+  aspect-ratio: 1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+}
+
+.phone-mini-cell.given {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.phone-mini-cell.selected {
+  background: #bbf7d0;
+  outline: 2px solid #047857;
+}
+
+.phone-mini-keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.phone-key-btn {
+  padding: 7px 4px;
+  border-radius: 8px;
+  background: #047857;
+  color: #ffffff;
+  font-family: var(--font-bn);
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #064e3b;
+}
+
+.phone-key-btn:active {
+  transform: translateY(2px);
+}
+
+/* Bottom Navigation inside Phone Mockup */
+.phone-bottom-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  padding: 6px 4px 10px;
+}
+
+.phone-tab-btn {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font-bn);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.phone-tab-btn.active {
+  color: #047857;
+  background: #ecfdf5;
+}
+
+/* Floating 3D Badges Outside the Phone on Z-Axis */
+.floating-3d-badge {
+  position: absolute;
+  padding: 10px 15px;
+  border-radius: 16px;
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid var(--glass-border-bright);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.5);
+  color: var(--text-primary);
+  font-size: 0.84rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateZ(65px);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.floating-3d-badge:hover {
+  transform: translateZ(95px) scale(1.08) !important;
+}
+
+.badge-float-1 {
+  top: 42px;
+  left: -68px;
+  animation: floatBadge 5s ease-in-out infinite alternate;
+}
+
+.badge-float-2 {
+  bottom: 140px;
+  right: -72px;
+  animation: floatBadge 6s ease-in-out infinite alternate-reverse;
+}
+
+.badge-float-3 {
+  bottom: 36px;
+  left: -58px;
+  animation: floatBadge 5.5s ease-in-out 1s infinite alternate;
+}
+
+.badge-float-logo {
+  top: -22px;
+  right: -34px;
+  width: 68px;
+  height: 68px;
+  padding: 5px;
+  border-radius: 20px;
+  transform: translateZ(80px) rotate(10deg);
+}
+
+.badge-float-logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+@keyframes floatBadge {
+  0% { margin-top: 0px; }
+  100% { margin-top: -12px; }
+}
+
+.phone-controls-bar {
+  display: flex;
+  gap: 8px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.chip-control-btn {
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-family: var(--font-bn);
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: var(--bg-glass);
+  color: var(--text-secondary);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip-control-btn.active,
+.chip-control-btn:hover {
+  background: rgba(16, 185, 129, 0.22);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+/* ==========================================================================
+   SECTION HEADERS
+   ========================================================================== */
+
+.section-block {
+  padding: 76px 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(251, 191, 36, 0.14);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  color: var(--accent-secondary);
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.06rem;
+}
+
+/* ==========================================================================
+   5 GAME MODES 3D SHOWCASE GRID
+   ========================================================================== */
+
+.modes-3d-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+  perspective: 1200px;
+}
+
+.mode-card-3d {
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.mode-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mode-icon-3d {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+}
+
+.mode-badge-pill {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.mode-title-bn {
+  font-size: 1.32rem;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.mode-desc-bn {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+.mode-sample-letters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.sample-tile {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--accent-secondary);
+  transition: transform 0.2s ease;
+}
+
+.mode-card-3d:hover .sample-tile {
+  transform: translateY(-3px) rotate(4deg);
+}
+
+.btn-try-mode {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: rgba(16, 185, 129, 0.16);
+  color: var(--text-primary);
+  font-family: var(--font-bn);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-card-3d:hover .btn-try-mode {
+  background: var(--emerald-600);
+  color: #fff;
+  border-color: var(--emerald-400);
+}
+
+/* ==========================================================================
+   LIVE INTERACTIVE PLAYABLE BORNO-SUDOKU & WORD HUNT ARENA
+   ========================================================================== */
+
+.playground-shell {
+  padding: 32px;
+  border-radius: 30px;
+}
+
+.playground-mode-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 26px;
+  justify-content: center;
+}
+
+.play-tab-btn {
+  padding: 10px 20px;
+  border-radius: 14px;
+  border: 1.5px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  font-family: var(--font-bn);
+  font-size: 0.96rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.22s ease;
+}
+
+.play-tab-btn.active,
+.play-tab-btn:hover {
+  background: linear-gradient(135deg, var(--emerald-600), var(--emerald-700));
+  color: #ffffff;
+  border-color: var(--emerald-300);
+  box-shadow: 0 8px 22px rgba(16, 185, 129, 0.35);
+  transform: translateY(-2px);
+}
+
+.playground-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Sudoku Board Stage */
+.board-stage-card {
+  background: rgba(6, 28, 22, 0.65);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+[data-theme="light"] .board-stage-card {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.game-hud-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-border);
+}
+
+.hud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* Secret Word Clue Banner */
+.secret-clue-banner {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.22), rgba(245, 158, 11, 0.1));
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.secret-clue-banner.visible {
+  display: flex;
+}
+
+/* Interactive 3D Sudoku Grid */
+.live-sudoku-grid {
+  width: 100%;
+  max-width: 410px;
+  aspect-ratio: 1;
+  display: grid;
+  background: #0f172a;
+  border: 3px solid #34d399;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.live-sudoku-cell {
+  background: rgba(30, 41, 59, 0.92);
+  border: 1px solid rgba(100, 116, 139, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #f8fafc;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: all 0.15s ease;
+}
+
+[data-theme="light"] .live-sudoku-cell {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+.live-sudoku-cell.given {
+  background: rgba(51, 65, 85, 0.95);
+  color: #6ee7b7;
+}
+
+[data-theme="light"] .live-sudoku-cell.given {
+  background: #e2e8f0;
+  color: #047857;
+}
+
+.live-sudoku-cell.selected {
+  background: rgba(6, 95, 70, 0.95) !important;
+  color: #fbbf24 !important;
+  box-shadow: inset 0 0 0 2.5px #fbbf24;
+  z-index: 2;
+}
+
+[data-theme="light"] .live-sudoku-cell.selected {
+  background: #bbf7d0 !important;
+  color: #064e3b !important;
+  box-shadow: inset 0 0 0 2.5px #047857;
+}
+
+.live-sudoku-cell.highlighted {
+  background: rgba(4, 66, 49, 0.72);
+}
+
+[data-theme="light"] .live-sudoku-cell.highlighted {
+  background: #dcfce7;
+}
+
+.live-sudoku-cell.same-letter {
+  background: rgba(16, 185, 129, 0.32);
+}
+
+.live-sudoku-cell.conflict {
+  background: rgba(127, 29, 29, 0.92) !important;
+  color: #fca5a5 !important;
+  animation: cellShake 0.35s ease;
+}
+
+@keyframes cellShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.cell-notes-grid {
+  position: absolute;
+  inset: 3px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 0.62rem;
+  color: #94a3b8;
+  line-height: 1;
+  align-items: center;
+  justify-items: center;
+  pointer-events: none;
+}
+
+/* Sub-grid thick borders for 4x4 and 6x6 */
+.live-sudoku-cell.thick-right {
+  border-right: 2.5px solid #34d399;
+}
+.live-sudoku-cell.thick-bottom {
+  border-bottom: 2.5px solid #34d399;
+}
+
+/* Right Controls & Built-in Bengali Keypad */
+.controls-stage-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.assistant-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.tool-action-btn {
+  padding: 12px 8px;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  font-family: var(--font-bn);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+
+.tool-action-btn:hover,
+.tool-action-btn.active {
+  background: rgba(16, 185, 129, 0.22);
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.bengali-keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.keypad-letter-btn {
+  position: relative;
+  padding: 16px 10px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(16, 185, 129, 0.24), rgba(4, 120, 87, 0.42));
+  border: 1.5px solid rgba(52, 211, 153, 0.4);
+  color: var(--text-primary);
+  font-family: var(--font-bn);
+  font-size: 1.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(4, 120, 87, 0.5), 0 10px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.keypad-letter-btn:hover {
+  transform: translateY(-3px);
+  border-color: var(--saffron-400);
+}
+
+.keypad-letter-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 rgba(4, 120, 87, 0.5);
+}
+
+.keypad-letter-btn.completed {
+  opacity: 0.55;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.keypad-count-badge {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.75);
+  color: var(--saffron-400);
+  font-size: 0.74rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Word Hunt (শব্দ সন্ধান) Interactive Wheel Mode */
+.word-hunt-stage {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.word-hunt-stage.active {
+  display: grid;
+}
+
+.word-wheel-circle {
+  width: 270px;
+  height: 270px;
+  border-radius: 50%;
+  margin: 0 auto;
+  position: relative;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.22), rgba(6, 78, 59, 0.55));
+  border: 2px solid var(--glass-border-bright);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4), inset 0 0 25px rgba(52, 211, 153, 0.25);
+}
+
+.wheel-letter-node {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #f59e0b, #d97706);
+  color: #fff;
+  font-family: var(--font-bn);
+  font-size: 1.45rem;
+  font-weight: 700;
+  border: 2px solid #fde68a;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wheel-letter-node:hover,
+.wheel-letter-node.selected {
+  transform: translate(-50%, -50%) scale(1.16);
+  background: linear-gradient(145deg, #10b981, #047857);
+  border-color: #a7f3d0;
+}
+
+.word-targets-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.word-target-chip {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.word-target-chip.found {
+  background: rgba(16, 185, 129, 0.22);
+  border-color: var(--emerald-400);
+}
+
+/* ==========================================================================
+   FEATURES BENTO GRID (6 PILLARS)
+   ========================================================================== */
+
+.bento-features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.bento-card {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bento-card.span-2 {
+  grid-column: span 2;
+}
+
+.bento-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.55rem;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+}
+
+.bento-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.bento-text {
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+}
+
+/* ==========================================================================
+   GAMIFICATION: INTERACTIVE XP SIMULATOR & 8 3D HOLOGRAPHIC BADGES
+   ========================================================================== */
+
+.rank-simulator-card {
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.rank-sim-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.rank-showcase-badge {
+  padding: 24px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(4, 120, 87, 0.45), rgba(217, 119, 6, 0.25));
+  border: 1.5px solid var(--glass-border-bright);
+  text-align: center;
+}
+
+.xp-slider-input {
+  width: 100%;
+  accent-color: var(--saffron-400);
+  height: 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  margin: 14px 0;
+}
+
+.ranks-stepper {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.rank-step-pill {
+  padding: 8px 6px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rank-step-pill.active {
+  background: rgba(251, 191, 36, 0.22);
+  border-color: var(--saffron-400);
+  color: var(--saffron-300);
+  transform: translateY(-3px);
+}
+
+.badges-8-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.holo-badge-card {
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  cursor: pointer;
+}
+
+.holo-badge-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
+}
+
+/* ==========================================================================
+   APK DOWNLOAD HUB & QR CODE SECTION
+   ========================================================================== */
+
+.download-hub-card {
+  padding: 42px;
+  border: 1.5px solid var(--glass-border-bright);
+  background: linear-gradient(145deg, rgba(6, 78, 59, 0.65), rgba(15, 23, 42, 0.78));
+}
+
+[data-theme="light"] .download-hub-card {
+  background: linear-gradient(145deg, rgba(236, 253, 245, 0.92), rgba(254, 243, 199, 0.75));
+}
+
+.download-hub-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.spec-pills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.spec-box {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-border);
+}
+
+.spec-label {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.spec-val {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.qr-card-box {
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+#qr-canvas {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.install-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.install-step-card {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.step-num-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--emerald-600);
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   MODALS (RULES DIALOG, VICTORY DIALOG, APK DOWNLOAD TOAST)
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(2, 12, 9, 0.76);
+  backdrop-filter: blur(12px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal-glass-card {
+  max-width: 540px;
+  width: 100%;
+  padding: 28px;
+  border-radius: 26px;
+  background: var(--bg-glass-strong);
+  border: 1.5px solid var(--glass-border-bright);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.7);
+  animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.9) translateY(16px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.rule-row {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+/* Footer */
+.site-footer {
+  padding: 48px 0 36px;
+  border-top: 1px solid var(--glass-border);
+  margin-top: 40px;
+  background: rgba(3, 18, 14, 0.55);
+  backdrop-filter: blur(16px);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .hero-grid,
+  .playground-layout,
+  .rank-sim-grid,
+  .download-hub-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bento-card.span-2 {
+    grid-column: span 2;
+  }
+  .nav-links {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-stats-bar,
+  .spec-pills-grid,
+  .install-steps-grid,
+  .bento-features-grid,
+  .word-hunt-stage {
+    grid-template-columns: 1fr;
+  }
+  .bento-card.span-2 {
+    grid-column: span 1;
+  }
+  .ranks-stepper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .phone-3d-rig {
+    width: 300px;
+    height: 610px;
+  }
+  .badge-float-1, .badge-float-2, .badge-float-3 {
+    display: none;
+  }
+}
