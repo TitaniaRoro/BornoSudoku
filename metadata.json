@@ -1,0 +1,6 @@
+{
+  "name": "Borno Sudoku",
+  "description": "Bengali word and letter puzzle app featuring Sudoku-style 6x6, 4x4 and 9x9 Wordoku grids, daily challenges, and Bengali word hunts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
